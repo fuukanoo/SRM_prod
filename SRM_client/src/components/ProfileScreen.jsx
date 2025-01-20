@@ -11,29 +11,69 @@ function ProfileScreen({ profileData, setProfileData }) {
     setProfileData((prev) => ({ ...prev, [name]: files[0] }));
   };
 
+  const photoPreviewUrl = profileData.photo
+    ? URL.createObjectURL(profileData.photo)
+    : null;
+
   return (
     <div className="container">
+      {/* 名前と写真 */}
       <div className="flex-row">
-        <div className="profile-image" />
+        <div
+          className="profile-photo"
+          style={{
+            backgroundImage: photoPreviewUrl ? `url(${photoPreviewUrl})` : "none",
+          }}
+        >
+          {!photoPreviewUrl && <p>写真を挿入</p>}
+          <input
+            type="file"
+            accept="image/*"
+            name="photo"
+            onChange={(e) => handleFileChange({ ...e, name: "photo" })}
+          />
+        </div>
         <div>
-          <h2>やまだ たろう</h2>
-          <h2>山田 太郎 (30)</h2>
+          <div>
+            <input
+              type="text"
+              name="furigana"
+              value={profileData.furigana || ""}
+              onChange={handleInputChange}
+              placeholder="フリガナを入力"
+              style={{
+                fontSize: "1.2rem",
+                fontWeight: "normal",
+                border: "none",
+                borderBottom: "2px solid #ccc",
+                marginBottom: "10px",
+                outline: "none",
+                width: "200px",
+              }}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="name"
+              value={profileData.name || ""}
+              onChange={handleInputChange}
+              placeholder="漢字を入力"
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                border: "none",
+                borderBottom: "2px solid #ccc",
+                marginBottom: "10px",
+                outline: "none",
+                width: "200px",
+              }}
+            />
+          </div>
         </div>
       </div>
 
-      <div className="step-container">
-        <div className="step">エントリー</div>
-        <div className="step">調整中</div>
-        <div className="step highlight">カジュアル</div>
-        <div className="step">調整中</div>
-        <div className="step">1次</div>
-        <div className="step">調整中</div>
-        <div className="step">2次</div>
-        <div className="step">調整中</div>
-        <div className="step">最終</div>
-        <div className="step">調整中</div>
-      </div>
-
+      {/* 最終学歴、職務経歴、ファイル添付 */}
       <div className="info-section">
         <div>
           <label>最終学歴: </label>

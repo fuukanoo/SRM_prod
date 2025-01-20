@@ -1,43 +1,125 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ProfileScreen from "./components/ProfileScreen";
-import InterviewScreen from "./components/InterviewScreen";
-import ScheduleScreen from "./components/ScheduleScreen";
+import CasualScreen from "./components/CasualScreen";
+import AdjustmentScreen from "./components/AdjustmentScreen";
+import OtherScreens from "./components/OtherScreens";
 
 function App() {
-  // グローバル状態
   const [profileData, setProfileData] = useState({
+    name: "",
+    furigana: "",
+    photo: null,
     education: "",
     career: "",
     resume: null,
     careerSheet: null,
   });
 
-  return (
-    <BrowserRouter>
-      <nav style={{ padding: "1rem", background: "#333" }}>
-        <Link to="/" style={{ color: "#fff", marginRight: "1rem" }}>プロフィール</Link>
-        <Link to="/interview" style={{ color: "#fff", marginRight: "1rem" }}>面談結果</Link>
-        <Link to="/schedule" style={{ color: "#fff" }}>スケジュール</Link>
-      </nav>
+  const [casualData, setCasualData] = useState({
+    result: "",
+    honesty: "",
+    teamLove: "",
+    charm: "",
+    humility: "",
+    notes: "",
+  });
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <ProfileScreen profileData={profileData} setProfileData={setProfileData} />
-          }
-        />
-        <Route
-          path="/interview"
-          element={<InterviewScreen profileData={profileData} />}
-        />
-        <Route
-          path="/schedule"
-          element={<ScheduleScreen profileData={profileData} />}
-        />
-      </Routes>
-    </BrowserRouter>
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const steps = [
+    <ProfileScreen profileData={profileData} setProfileData={setProfileData} />,
+    <AdjustmentScreen profileData={profileData} />,
+    <CasualScreen casualData={casualData} setCasualData={setCasualData} />,
+    <AdjustmentScreen profileData={profileData} />,
+    ...Array(6).fill(<OtherScreens profileData={profileData} casualData={casualData} />),
+  ];
+
+  const stepLabels = [
+    "エントリー",
+    "調整中",
+    "カジュアル",
+    "調整中",
+    "1次",
+    "調整中",
+    "2次",
+    "調整中",
+    "最終",
+    "調整中",
+  ];
+
+  const handleNext = () => {
+    if (currentStep < steps.length - 1) {
+      setCurrentStep((prev) => prev + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentStep > 0) {
+      setCurrentStep((prev) => prev - 1);
+    }
+  };
+
+  const handleStepClick = (index) => {
+    setCurrentStep(index);
+  };
+
+  return (
+    <div>
+      {/* ステップ表示 */}
+      <div className="step-container">
+        {stepLabels.map((label, index) => (
+          <div
+            key={index}
+            className={`step ${index === currentStep ? "highlight" : ""}`}
+            onClick={() => handleStepClick(index)}
+            style={{ cursor: "pointer" }}
+          >
+            {label}
+          </div>
+        ))}
+      </div>
+
+      {/* 現在の画面 */}
+      <div style={{ marginBottom: "20px" }}>{steps[currentStep]}</div>
+
+      {/* 次へ/前へボタン */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "20px",
+        }}
+      >
+        <button
+          onClick={handlePrevious}
+          disabled={currentStep === 0}
+          style={{
+            padding: "10px 20px",
+            backgroundColor: currentStep === 0 ? "#ccc" : "#007bff",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
+            cursor: currentStep === 0 ? "not-allowed" : "pointer",
+          }}
+        >
+          前へ
+        </button>
+        <button
+          onClick={handleNext}
+          disabled={currentStep === steps.length - 1}
+          style={{
+            padding: "10px 20px",
+            backgroundColor: currentStep === steps.length - 1 ? "#ccc" : "#007bff",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
+            cursor: currentStep === steps.length - 1 ? "not-allowed" : "pointer",
+          }}
+        >
+          次へ
+        </button>
+      </div>
+    </div>
   );
 }
 
