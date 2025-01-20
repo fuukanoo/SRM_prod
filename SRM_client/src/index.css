@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #fafafa;
+    color: #333;
+  }
+  
+  .container {
+    width: 1200px;
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+  }
+  
+  /* タイトルや大きめの文字 */
+  .title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  /* ステップの矢印風要素 */
+  .step-container {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1rem;
+    align-items: center;
+  }
+  
+  .step {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #ccc;
+    color: #fff;
+    clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
+    margin-right: 4px;
+    font-size: 0.9rem;
+    min-width: 60px;
+    text-align: center;
+    position: relative;
+  }
+  
+  /* カジュアルなど特定ステップをハイライト */
+  .step.highlight {
+    background-color: #333; /* 黒っぽい背景 */
+  }
+  
+  .step.yellow {
+    background-color: #ffc107;
+  }
+  
+  /* プロフィールのアイコン枠 */
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    background-color: #ddd;
+    margin-right: 1rem;
+  }
+  
+  .flex-row {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .info-section {
+    margin-bottom: 1rem;
+  }
+  
+  .info-section h2 {
+    margin: 0.5rem 0;
+  }
+  
+  .label {
+    font-weight: bold;
+  }
+  
+  .table-like {
+    display: table;
+  }
+  
+  .table-row {
+    display: table-row;
+  }
+  
+  .table-cell {
+    display: table-cell;
+    padding: 4px 12px;
+    border: 1px solid #ddd;
+  }
+  
+  /* 面談結果の表 */
+  .result-table {
+    margin-top: 1rem;
+    border-collapse: collapse;
+  }
+  
+  .result-table td,
+  .result-table th {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+  
+  .text-area {
+    width: 100%;
+    height: 100px;
+    margin-top: 1rem;
+  }
+  
+  /* スケジュール調整画面 */
+  .schedule-form {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1rem;
+  }
+  
+  .schedule-form .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .schedule-candidate-list {
+    background-color: #fce8e8;
+    padding: 1rem;
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+  }
+  
+  .copy-button {
+    cursor: pointer;
+    color: #888;
+    margin-left: 8px;
+  }
+  
