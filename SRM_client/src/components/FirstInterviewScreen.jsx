@@ -1,60 +1,77 @@
 import React from "react";
 
-function FirstInterviewScreen({ firstInterviewData, setFirstInterviewData }) {
+function FirstInterviewScreen({ interviewData, setInterviewData }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFirstInterviewData((prev) => ({ ...prev, [name]: value }));
+    setInterviewData((prev) => ({
+      ...prev,
+      firstInterview: {
+        ...prev.firstInterview,
+        [name]: value || "",
+      },
+    }));
+  };
+
+  const firstInterview = interviewData?.firstInterview || {
+    technicalSkills: "",
+    problemSolving: "",
+    logicalThinking: "",
+    leadership: "",
+    careerVision: "",
   };
 
   return (
     <div className="container">
       <h2>一次面接</h2>
-      <div className="info-section">
-        <div>
-          <label>専門知識・技術力:</label>
-          <textarea
-            name="technicalSkills"
-            value={firstInterviewData.technicalSkills || ""}
-            onChange={handleInputChange}
-            style={{ width: "100%", height: "100px", marginBottom: "10px" }}
-          />
-        </div>
-        <div>
-          <label>問題解決能力:</label>
-          <textarea
-            name="problemSolving"
-            value={firstInterviewData.problemSolving || ""}
-            onChange={handleInputChange}
-            style={{ width: "100%", height: "100px", marginBottom: "10px" }}
-          />
-        </div>
-        <div>
-          <label>論理的思考力:</label>
-          <textarea
-            name="logicalThinking"
-            value={firstInterviewData.logicalThinking || ""}
-            onChange={handleInputChange}
-            style={{ width: "100%", height: "100px", marginBottom: "10px" }}
-          />
-        </div>
-        <div>
-          <label>リーダーシップ・主体性:</label>
-          <textarea
-            name="leadership"
-            value={firstInterviewData.leadership || ""}
-            onChange={handleInputChange}
-            style={{ width: "100%", height: "100px", marginBottom: "10px" }}
-          />
-        </div>
-        <div>
-          <label>キャリアビジョン:</label>
-          <textarea
-            name="careerVision"
-            value={firstInterviewData.careerVision || ""}
-            onChange={handleInputChange}
-            style={{ width: "100%", height: "100px", marginBottom: "10px" }}
-          />
-        </div>
+      <div>
+        <label>専門知識・技術力:</label>
+        <input
+          type="text"
+          name="technicalSkills"
+          value={firstInterview.technicalSkills}
+          onChange={handleInputChange}
+          style={{ width: "100%", marginBottom: "10px" }}
+        />
+      </div>
+      <div>
+        <label>問題解決能力:</label>
+        <input
+          type="text"
+          name="problemSolving"
+          value={firstInterview.problemSolving}
+          onChange={handleInputChange}
+          style={{ width: "100%", marginBottom: "10px" }}
+        />
+      </div>
+      <div>
+        <label>論理的思考力:</label>
+        <input
+          type="text"
+          name="logicalThinking"
+          value={firstInterview.logicalThinking}
+          onChange={handleInputChange}
+          style={{ width: "100%", marginBottom: "10px" }}
+        />
+      </div>
+      <div>
+        <label>リーダーシップ・主体性:</label>
+        <input
+          type="text"
+          name="leadership"
+          value={firstInterview.leadership}
+          onChange={handleInputChange}
+          style={{ width: "100%", marginBottom: "10px" }}
+        />
+      </div>
+      <div>
+        <label>キャリアビジョン:</label>
+        <input
+          type="text"
+          name="careerVision"
+          value={firstInterview.careerVision}
+          onChange={handleInputChange}
+          style={{ width: "100%", marginBottom: "10px" }}
+        />
       </div>
     </div>
   );

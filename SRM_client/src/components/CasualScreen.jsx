@@ -1,35 +1,50 @@
 import React from "react";
 
-function CasualScreen({ profileData, casualData = {}, setCasualData }) {
-  const photoPreviewUrl = profileData.photo
-    ? URL.createObjectURL(profileData.photo)
-    : null;
-
+function CasualScreen({ profileData, casualData, setCasualData }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCasualData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const photoPreviewUrl = profileData.photo
+    ? URL.createObjectURL(profileData.photo)
+    : null;
+
   return (
     <div className="container">
-      {/* 名前と写真 */}
-      <div className="flex-row">
+      <h2>カジュアル</h2>
+      <div style={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
+        {/* 写真表示 */}
         <div
-          className="profile-photo"
           style={{
+            width: "120px", // 横幅
+            height: "160px", // 縦幅 (4:3比率)
+            backgroundColor: "#e0e0e0",
+            borderRadius: "5px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             backgroundImage: photoPreviewUrl ? `url(${photoPreviewUrl})` : "none",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            border: "1px solid #ccc",
+            marginRight: "20px",
           }}
         >
           {!photoPreviewUrl && <p>写真未挿入</p>}
         </div>
         <div>
-          <h3>{profileData.furigana || "フリガナ未入力"}</h3>
-          <h2>{profileData.name || "名前未入力"}</h2>
+          <p>
+            <strong>フリガナ:</strong> {profileData.furigana || "未入力"}
+          </p>
+          <p>
+            <strong>名前:</strong> {profileData.name || "未入力"}
+          </p>
         </div>
       </div>
 
-      {/* 判定結果および各項目の入力欄 */}
-      <div className="info-section">
+      {/* 評価項目の入力 */}
+      <div style={{ marginBottom: "20px" }}>
         <div>
           <label>判定結果:</label>
           <input
@@ -37,7 +52,7 @@ function CasualScreen({ profileData, casualData = {}, setCasualData }) {
             name="result"
             value={casualData.result || ""}
             onChange={handleInputChange}
-            style={{ width: "100%", marginBottom: "10px" }}
+            style={{ width: "100%" }}
           />
         </div>
         <div>
@@ -47,7 +62,7 @@ function CasualScreen({ profileData, casualData = {}, setCasualData }) {
             name="honesty"
             value={casualData.honesty || ""}
             onChange={handleInputChange}
-            style={{ width: "100%", marginBottom: "10px" }}
+            style={{ width: "100%" }}
           />
         </div>
         <div>
@@ -57,7 +72,7 @@ function CasualScreen({ profileData, casualData = {}, setCasualData }) {
             name="teamLove"
             value={casualData.teamLove || ""}
             onChange={handleInputChange}
-            style={{ width: "100%", marginBottom: "10px" }}
+            style={{ width: "100%" }}
           />
         </div>
         <div>
@@ -67,26 +82,27 @@ function CasualScreen({ profileData, casualData = {}, setCasualData }) {
             name="charm"
             value={casualData.charm || ""}
             onChange={handleInputChange}
-            style={{ width: "100%", marginBottom: "10px" }}
+            style={{ width: "100%" }}
           />
         </div>
         <div>
-          <label>謙虚さと責任感:</label>
+          <label>謙虚さ:</label>
           <input
             type="text"
-            name="humility"
-            value={casualData.humility || ""}
+            name="modesty"
+            value={casualData.modesty || ""}
             onChange={handleInputChange}
-            style={{ width: "100%", marginBottom: "10px" }}
+            style={{ width: "100%" }}
           />
         </div>
         <div>
-          <label>備考記入欄:</label>
-          <textarea
-            name="notes"
-            value={casualData.notes || ""}
+          <label>責任感:</label>
+          <input
+            type="text"
+            name="responsibility"
+            value={casualData.responsibility || ""}
             onChange={handleInputChange}
-            style={{ width: "100%", height: "100px" }}
+            style={{ width: "100%" }}
           />
         </div>
       </div>
