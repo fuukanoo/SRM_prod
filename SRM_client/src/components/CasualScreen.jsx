@@ -1,9 +1,14 @@
 import React from "react";
 
-function CasualScreen({ profileData = {} }) {
+function CasualScreen({ profileData, casualData = {}, setCasualData }) {
   const photoPreviewUrl = profileData.photo
     ? URL.createObjectURL(profileData.photo)
     : null;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCasualData((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <div className="container">
@@ -23,42 +28,67 @@ function CasualScreen({ profileData = {} }) {
         </div>
       </div>
 
-      {/* エントリー画面の情報 */}
+      {/* 判定結果および各項目の入力欄 */}
       <div className="info-section">
-        <p>
-          <strong>最終学歴:</strong> {profileData.education || "未入力"}
-        </p>
-        <p>
-          <strong>職務経歴:</strong> {profileData.career || "未入力"}
-        </p>
-        <p>
-          <strong>履歴書:</strong>{" "}
-          {profileData.resume ? (
-            <a
-              href={URL.createObjectURL(profileData.resume)}
-              download={profileData.resume.name}
-              style={{ textDecoration: "none", color: "#007bff" }}
-            >
-              📎
-            </a>
-          ) : (
-            "未アップロード"
-          )}
-        </p>
-        <p>
-          <strong>職務経歴書:</strong>{" "}
-          {profileData.careerSheet ? (
-            <a
-              href={URL.createObjectURL(profileData.careerSheet)}
-              download={profileData.careerSheet.name}
-              style={{ textDecoration: "none", color: "#007bff" }}
-            >
-              📎
-            </a>
-          ) : (
-            "未アップロード"
-          )}
-        </p>
+        <div>
+          <label>判定結果:</label>
+          <input
+            type="text"
+            name="result"
+            value={casualData.result || ""}
+            onChange={handleInputChange}
+            style={{ width: "100%", marginBottom: "10px" }}
+          />
+        </div>
+        <div>
+          <label>誠実:</label>
+          <input
+            type="text"
+            name="honesty"
+            value={casualData.honesty || ""}
+            onChange={handleInputChange}
+            style={{ width: "100%", marginBottom: "10px" }}
+          />
+        </div>
+        <div>
+          <label>チーム愛:</label>
+          <input
+            type="text"
+            name="teamLove"
+            value={casualData.teamLove || ""}
+            onChange={handleInputChange}
+            style={{ width: "100%", marginBottom: "10px" }}
+          />
+        </div>
+        <div>
+          <label>愛嬌:</label>
+          <input
+            type="text"
+            name="charm"
+            value={casualData.charm || ""}
+            onChange={handleInputChange}
+            style={{ width: "100%", marginBottom: "10px" }}
+          />
+        </div>
+        <div>
+          <label>謙虚さと責任感:</label>
+          <input
+            type="text"
+            name="humility"
+            value={casualData.humility || ""}
+            onChange={handleInputChange}
+            style={{ width: "100%", marginBottom: "10px" }}
+          />
+        </div>
+        <div>
+          <label>備考記入欄:</label>
+          <textarea
+            name="notes"
+            value={casualData.notes || ""}
+            onChange={handleInputChange}
+            style={{ width: "100%", height: "100px" }}
+          />
+        </div>
       </div>
     </div>
   );

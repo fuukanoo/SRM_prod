@@ -34,13 +34,15 @@ function AdjustmentScreen({ profileData }) {
         <p>
           <strong>履歴書:</strong>{" "}
           {profileData.resume ? (
-            <a
-              href={URL.createObjectURL(profileData.resume)}
-              download={profileData.resume.name}
-              style={{ textDecoration: "none", color: "#007bff" }}
+            <span
+              onClick={() => {
+                const fileURL = URL.createObjectURL(profileData.resume);
+                window.open(fileURL, "_blank");
+              }}
+              style={{ cursor: "pointer", color: "#007bff" }}
             >
               📎
-            </a>
+            </span>
           ) : (
             "未アップロード"
           )}
@@ -48,13 +50,15 @@ function AdjustmentScreen({ profileData }) {
         <p>
           <strong>職務経歴書:</strong>{" "}
           {profileData.careerSheet ? (
-            <a
-              href={URL.createObjectURL(profileData.careerSheet)}
-              download={profileData.careerSheet.name}
-              style={{ textDecoration: "none", color: "#007bff" }}
+            <span
+              onClick={() => {
+                const fileURL = URL.createObjectURL(profileData.careerSheet);
+                window.open(fileURL, "_blank");
+              }}
+              style={{ cursor: "pointer", color: "#007bff" }}
             >
               📎
-            </a>
+            </span>
           ) : (
             "未アップロード"
           )}

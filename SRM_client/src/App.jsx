@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import ProfileScreen from "./components/ProfileScreen";
 import CasualScreen from "./components/CasualScreen";
 import AdjustmentScreen from "./components/AdjustmentScreen";
+import FirstInterviewScreen from "./components/FirstInterviewScreen";
+import SecondInterviewScreen from "./components/SecondInterviewScreen";
 import OtherScreens from "./components/OtherScreens";
 
 function App() {
@@ -24,14 +26,44 @@ function App() {
     notes: "",
   });
 
+  const [firstInterviewData, setFirstInterviewData] = useState({
+    technicalSkills: "",
+    problemSolving: "",
+    logicalThinking: "",
+    leadership: "",
+    careerVision: "",
+  });
+
+  const [secondInterviewData, setSecondInterviewData] = useState({
+    technicalSkills: "",
+    problemSolving: "",
+    logicalThinking: "",
+    leadership: "",
+    careerVision: "",
+  });
+
   const [currentStep, setCurrentStep] = useState(0);
 
   const steps = [
     <ProfileScreen profileData={profileData} setProfileData={setProfileData} />,
     <AdjustmentScreen profileData={profileData} />,
-    <CasualScreen profileData={profileData} />,
+    <CasualScreen
+      profileData={profileData}
+      casualData={casualData}
+      setCasualData={setCasualData}
+    />,
     <AdjustmentScreen profileData={profileData} />,
-    ...Array(6).fill(<OtherScreens profileData={profileData} casualData={casualData} />),
+    <FirstInterviewScreen
+      firstInterviewData={firstInterviewData}
+      setFirstInterviewData={setFirstInterviewData}
+    />,
+    <AdjustmentScreen profileData={profileData} />,
+    <SecondInterviewScreen
+      secondInterviewData={secondInterviewData}
+      setSecondInterviewData={setSecondInterviewData}
+    />,
+    <AdjustmentScreen profileData={profileData} />,
+    ...Array(2).fill(<OtherScreens profileData={profileData} casualData={casualData} />),
   ];
 
   const stepLabels = [
@@ -47,25 +79,13 @@ function App() {
     "調整中",
   ];
 
-  const handleNext = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep((prev) => prev + 1);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentStep > 0) {
-      setCurrentStep((prev) => prev - 1);
-    }
-  };
-
   const handleStepClick = (index) => {
     setCurrentStep(index);
   };
 
   return (
     <div>
-      {/* ステップ表示 */}
+      {/* ステップナビゲーション */}
       <div className="step-container">
         {stepLabels.map((label, index) => (
           <div
@@ -82,16 +102,10 @@ function App() {
       {/* 現在の画面 */}
       <div style={{ marginBottom: "20px" }}>{steps[currentStep]}</div>
 
-      {/* 次へ/前へボタン */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          margin: "20px",
-        }}
-      >
+      {/* 次へ・前へボタン */}
+      <div style={{ display: "flex", justifyContent: "space-between", margin: "20px" }}>
         <button
-          onClick={handlePrevious}
+          onClick={() => setCurrentStep((prev) => Math.max(prev - 1, 0))}
           disabled={currentStep === 0}
           style={{
             padding: "10px 20px",
@@ -105,7 +119,7 @@ function App() {
           前へ
         </button>
         <button
-          onClick={handleNext}
+          onClick={() => setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1))}
           disabled={currentStep === steps.length - 1}
           style={{
             padding: "10px 20px",
