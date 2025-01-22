@@ -29,7 +29,7 @@ function App() {
   const steps = [
     <ProfileScreen profileData={profileData} setProfileData={setProfileData} />,
     <AdjustmentScreen profileData={profileData} />,
-    <CasualScreen casualData={casualData} setCasualData={setCasualData} />,
+    <CasualScreen profileData={profileData} />,
     <AdjustmentScreen profileData={profileData} />,
     ...Array(6).fill(<OtherScreens profileData={profileData} casualData={casualData} />),
   ];
