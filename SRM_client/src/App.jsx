@@ -98,17 +98,19 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* ステップナビゲーション */}
-      <StepNavigator
-        steps={stepLabels}
-        currentStep={currentStep}
-        setCurrentStep={setCurrentStep}
-        onAddStep={handleAddStep}
-      />
-
-      {/* 現在のステップに対応するコンテンツ */}
-      <div className="container">{steps[currentStep]}</div>
+      <div className="container">
+        {/* ステップナビゲーション */}
+        <StepNavigator
+          steps={stepLabels}
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+          onAddStep={handleAddStep}
+        />
+        {/* 現在のステップのコンテンツ */}
+        {steps[currentStep]}
+      </div>
     </div>
+
   );
 }
 
