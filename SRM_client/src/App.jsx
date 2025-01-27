@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import StepNavigator from "./components/StepNavigator";
 import ProfileScreen from "./components/ProfileScreen";
 import EntryAdjustmentScreen from "./components/EntryAdjustmentScreen";
 import CasualScreen from "./components/CasualScreen";
@@ -46,33 +47,7 @@ function App() {
 
   const [currentStep, setCurrentStep] = useState(0);
 
-  const steps = [
-    <ProfileScreen profileData={profileData} setProfileData={setProfileData} />, // エントリー
-    <EntryAdjustmentScreen profileData={profileData} />, // 調整中（エントリー内容）
-    <CasualScreen
-      profileData={profileData}
-      casualData={casualData}
-      setCasualData={setCasualData} // カジュアル
-    />,
-    <OtherScreens profileData={profileData} casualData={casualData} />, // 調整中
-    <FirstInterviewScreen
-      interviewData={interviewData}
-      setInterviewData={setInterviewData} 
-    />, // 1次面接
-    <OtherScreens profileData={profileData} casualData={casualData} />, // 調整中
-    <SecondInterviewScreen
-      interviewData={interviewData}
-      setInterviewData={setInterviewData} 
-    />, // 2次面接
-    <OtherScreens profileData={profileData} casualData={casualData} />, // 調整中
-    <FinalInterviewScreen
-      interviewData={interviewData}
-      setInterviewData={setInterviewData} 
-    />, // 最終
-    <OtherScreens profileData={profileData} casualData={casualData} />, // 調整中
-  ];
-
-  const stepLabels = [
+  const [stepLabels, setStepLabels] = useState([
     "エントリー",
     "調整中",
     "カジュアル",
@@ -83,39 +58,56 @@ function App() {
     "調整中",
     "最終",
     "調整中",
-  ];
+  ]);
+
+  const [steps, setSteps] = useState([
+    <ProfileScreen profileData={profileData} setProfileData={setProfileData} />,
+    <EntryAdjustmentScreen profileData={profileData} />,
+    <CasualScreen
+      profileData={profileData}
+      casualData={casualData}
+      setCasualData={setCasualData}
+    />,
+    <OtherScreens profileData={profileData} casualData={casualData} />,
+    <FirstInterviewScreen
+      interviewData={interviewData}
+      setInterviewData={setInterviewData}
+    />,
+    <OtherScreens profileData={profileData} casualData={casualData} />,
+    <SecondInterviewScreen
+      interviewData={interviewData}
+      setInterviewData={setInterviewData}
+    />,
+    <OtherScreens profileData={profileData} casualData={casualData} />,
+    <FinalInterviewScreen
+      interviewData={interviewData}
+      setInterviewData={setInterviewData}
+    />,
+    <OtherScreens profileData={profileData} casualData={casualData} />,
+  ]);
+
+  // 新しいフォロー面談を追加する関数
+  const handleAddStep = () => {
+    const newStepName = "フォロー面談"; // 数字なし
+    setStepLabels((prev) => [...prev, newStepName]);
+    setSteps((prev) => [
+      ...prev,
+      <OtherScreens profileData={profileData} casualData={casualData} />,
+    ]);
+  };
 
   return (
     <div className="app-container">
-      <div className="step-container">
-        {stepLabels.map((label, index) => (
-          <div
-            key={index}
-            className={`step ${index === currentStep ? "highlight" : ""}`}
-            onClick={() => setCurrentStep(index)}
-            style={{ cursor: "pointer" }}
-          >
-            {label}
-          </div>
-        ))}
-      </div>
+      {/* ステップナビゲーション */}
+      <StepNavigator
+        steps={stepLabels}
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+        onAddStep={handleAddStep}
+      />
+
+      {/* 現在のステップに対応するコンテンツ */}
       <div className="container">{steps[currentStep]}</div>
-      <div className="button-container">
-        <button
-          onClick={() => setCurrentStep((prev) => Math.max(prev - 1, 0))}
-          disabled={currentStep === 0}
-          className="nav-button"
-        >
-          前へ
-        </button>
-        <button
-          onClick={() => setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1))}
-          disabled={currentStep === steps.length - 1}
-          className="nav-button"
-        >
-          次へ
-        </button>
-      </div>
     </div>
   );
 }

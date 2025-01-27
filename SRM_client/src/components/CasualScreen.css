@@ -38,12 +38,13 @@
 
 .furigana{
   font-size: 10px;
-  font-weight: bold;
+  color: #666;    /* 薄いグレーの色 */
 }
 
 .kanji_name {
-  font-size: 30px;
+  font-size: 70px;
   font-weight: bold;
+  color: #000;       /* 黒色 */
 }
 
 .evaluation {
