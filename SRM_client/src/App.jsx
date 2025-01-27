@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ProfileScreen from "./components/ProfileScreen";
+import EntryAdjustmentScreen from "./components/EntryAdjustmentScreen";
 import CasualScreen from "./components/CasualScreen";
 import FirstInterviewScreen from "./components/FirstInterviewScreen";
 import SecondInterviewScreen from "./components/SecondInterviewScreen";
@@ -47,7 +48,7 @@ function App() {
 
   const steps = [
     <ProfileScreen profileData={profileData} setProfileData={setProfileData} />, // エントリー
-    <OtherScreens profileData={profileData} casualData={casualData} />, // 調整中
+    <EntryAdjustmentScreen profileData={profileData} />, // 調整中（エントリー内容）
     <CasualScreen
       profileData={profileData}
       casualData={casualData}
