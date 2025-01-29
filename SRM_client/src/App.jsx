@@ -61,39 +61,67 @@ function App() {
   ]);
 
   const [steps, setSteps] = useState([
-    <ProfileScreen profileData={profileData} setProfileData={setProfileData} />,
-    <EntryAdjustmentScreen profileData={profileData} />,
-    <CasualScreen
-      profileData={profileData}
-      casualData={casualData}
-      setCasualData={setCasualData}
-    />,
-    <OtherScreens profileData={profileData} casualData={casualData} />,
-    <FirstInterviewScreen
-      interviewData={interviewData}
-      setInterviewData={setInterviewData}
-    />,
-    <OtherScreens profileData={profileData} casualData={casualData} />,
-    <SecondInterviewScreen
-      interviewData={interviewData}
-      setInterviewData={setInterviewData}
-    />,
-    <OtherScreens profileData={profileData} casualData={casualData} />,
-    <FinalInterviewScreen
-      interviewData={interviewData}
-      setInterviewData={setInterviewData}
-    />,
-    <OtherScreens profileData={profileData} casualData={casualData} />,
+    { id: 1, type: 'profile' },
+    { id: 2, type: 'entryAdjustment' },
+    { id: 3, type: 'casual' },
+    { id: 4, type: 'other' },
+    { id: 5, type: 'firstInterview' },
+    { id: 6, type: 'other' },
+    { id: 7, type: 'secondInterview' },
+    { id: 8, type: 'other' },
+    { id: 9, type: 'finalInterview' },
+    { id: 10, type: 'other' },
   ]);
 
   // 新しいフォロー面談を追加する関数
   const handleAddStep = () => {
-    const newStepName = "フォロー面談"; // 数字なし
+    const newStepName = `フォロー面談 ${steps.length + 1}`;
     setStepLabels((prev) => [...prev, newStepName]);
-    setSteps((prev) => [
-      ...prev,
-      <OtherScreens profileData={profileData} casualData={casualData} />,
-    ]);
+    setSteps((prev) => [...prev, { id: steps.length + 1, type: 'followUp' }]);
+  };
+
+  const renderStep = () => {
+    const step = steps[currentStep];
+    switch (step.type) {
+      case 'profile':
+        return <ProfileScreen profileData={profileData} setProfileData={setProfileData} />;
+      case 'entryAdjustment':
+        return <EntryAdjustmentScreen profileData={profileData} setProfileData={setProfileData} />;
+      case 'casual':
+        return (
+          <CasualScreen
+            profileData={profileData}
+            casualData={casualData}
+            setCasualData={setCasualData}
+          />
+        );
+      case 'firstInterview':
+        return (
+          <FirstInterviewScreen
+            interviewData={interviewData}
+            setInterviewData={setInterviewData}
+          />
+        );
+      case 'secondInterview':
+        return (
+          <SecondInterviewScreen
+            interviewData={interviewData}
+            setInterviewData={setInterviewData}
+          />
+        );
+      case 'finalInterview':
+        return (
+          <FinalInterviewScreen
+            interviewData={interviewData}
+            setInterviewData={setInterviewData}
+          />
+        );
+      case 'other':
+      case 'followUp':
+        return <OtherScreens profileData={profileData} casualData={casualData} />;
+      default:
+        return <div>ステップが見つかりません。</div>;
+    }
   };
 
   return (
@@ -107,10 +135,9 @@ function App() {
           onAddStep={handleAddStep}
         />
         {/* 現在のステップのコンテンツ */}
-        {steps[currentStep]}
+        {renderStep()}
       </div>
     </div>
-
   );
 }
 
