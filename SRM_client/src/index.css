@@ -1,41 +1,45 @@
-/* 全体のリセット */
+/* index.css */
+
+/* 全体のリセットと基本設定 */
 body, html {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #f0f0f0; /* 背景色を薄いグレーに設定 */
   width: 100%;
   height: 100%;
   overflow: hidden; /* スクロールを非表示 */
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0; /* 背景色を薄いグレーに設定 */
+  font-family: 'Arial', sans-serif;
 }
 
-/* アプリ全体を画面いっぱいに */
 .app-container {
+  width: 1280px;  /* 固定横幅 */
+  height: 720px;  /* 固定縦幅 */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.scale-wrapper {
+  width: 1280px;
+  height: 720px;
+  transform-origin: top left; /* スケーリングの起点を左上に設定 */
+}
+
+.container {
   width: 100%;
   height: 100%;
-  padding: 20px; /* 上下の余白を20pxに設定 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  padding: 20px;
   box-sizing: border-box;
+  overflow: auto; /* 内部のコンテンツがはみ出た場合にスクロール */
 }
 
-/* コンテンツエリアを可変サイズに */
-.container {
-  width: 95%; /* 横幅を90%に設定（画面幅に応じて調整） */
-  max-width: 2000px; /* 最大幅を1200pxに固定 */
-  height: calc(100% - 20px); /* 高さを画面サイズに応じて計算 */
-  padding: 20px;
-  background-color: #fff; /* 背景色を白に設定 */
-  border-radius: 8px; /* 角を丸める */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を付ける */
-  /* box-sizing: border-box; */
-  overflow: hidden; /* コンテンツがはみ出ないように設定 */
-}
+/* ステップナビゲーションのスタイルは既存のまま */
+
 
 /* メディアクエリでレスポンシブ対応 */
 @media (max-width: 768px) {

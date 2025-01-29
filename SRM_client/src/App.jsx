@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// App.jsx
+
+import React, { useState, useEffect } from "react";
 import StepNavigator from "./components/StepNavigator";
 import ProfileScreen from "./components/ProfileScreen";
 import EntryAdjustmentScreen from "./components/EntryAdjustmentScreen";
@@ -73,7 +75,6 @@ function App() {
     { id: 10, type: 'other' },
   ]);
 
-  // 新しいフォロー面談を追加する関数
   const handleAddStep = () => {
     const newStepName = `フォロー面談 ${steps.length + 1}`;
     setStepLabels((prev) => [...prev, newStepName]);
@@ -124,18 +125,51 @@ function App() {
     }
   };
 
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const updateScale = () => {
+      const fixedWidth = 1280;
+      const fixedHeight = 720;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+
+      const scaleX = windowWidth / fixedWidth;
+      const scaleY = windowHeight / fixedHeight;
+
+      const newScale = Math.min(scaleX, scaleY);
+      setScale(newScale);
+    };
+
+    // 初回レンダリング時にスケールを設定
+    updateScale();
+
+    // リサイズ時にスケールを更新
+    window.addEventListener("resize", updateScale);
+
+    // クリーンアップ
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
+
   return (
     <div className="app-container">
-      <div className="container">
-        {/* ステップナビゲーション */}
-        <StepNavigator
-          steps={stepLabels}
-          currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
-          onAddStep={handleAddStep}
-        />
-        {/* 現在のステップのコンテンツ */}
-        {renderStep()}
+      <div
+        className="scale-wrapper"
+        style={{
+          transform: `scale(${scale})`,
+        }}
+      >
+        <div className="container">
+          {/* ステップナビゲーション */}
+          <StepNavigator
+            steps={stepLabels}
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep}
+            onAddStep={handleAddStep}
+          />
+          {/* 現在のステップのコンテンツ */}
+          {renderStep()}
+        </div>
       </div>
     </div>
   );
