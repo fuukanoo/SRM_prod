@@ -86,10 +86,13 @@ function App() {
     { id: 11, type: 'other' },
   ]);
 
+  // フォロー面談の追加
   const handleAddStep = () => {
-    const newStepName = `フォロー面談 ${stepLabels.length - 10 + 1}`; // ステップラベルの位置に応じて番号を調整
+    const newStepIndex = steps.length;
+    const newStepName = `フォロー面談 ${newStepIndex - 10}`;
     setStepLabels((prev) => [...prev, newStepName]);
-    setSteps((prev) => [...prev, { id: prev.length + 1, type: 'followUp' }]);
+    setSteps((prev) => [...prev, { id: newStepIndex, type: "followUp" }]);
+    setCurrentStep(newStepIndex);
   };
 
   const renderStep = () => {

@@ -1,12 +1,9 @@
-// StepNavigator.jsx
-
 import React from "react";
 import "./StepNavigator.css";
 
 function StepNavigator({ steps, currentStep, setCurrentStep, onAddStep }) {
   return (
     <div className="step-navigator">
-      {/* 横スクロール対応のステップコンテナ */}
       <div className="step-container">
         {steps.map((step, index) => (
           <button
@@ -18,9 +15,8 @@ function StepNavigator({ steps, currentStep, setCurrentStep, onAddStep }) {
           </button>
         ))}
       </div>
-      {/* プラスボタン */}
       <button className="add-button" onClick={onAddStep}>
-        ＋
+        ＋ フォロー面談追加
       </button>
     </div>
   );

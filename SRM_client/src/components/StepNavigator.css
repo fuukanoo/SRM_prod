@@ -45,6 +45,7 @@
   border-radius: 5px;
   cursor: pointer;
   white-space: nowrap;
+  /* margin-left: -150px; 追加ボタンを少し寄せる */
 }
 
 .add-button:hover {
