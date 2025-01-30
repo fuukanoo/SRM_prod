@@ -1,23 +1,14 @@
+// FirstInterviewScreen.jsx
+
 import React from "react";
 
-function FirstInterviewScreen({ interviewData, setInterviewData }) {
+function FirstInterviewScreen({ firstInterviewData, setFirstInterviewData }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setInterviewData((prev) => ({
+    setFirstInterviewData((prev) => ({
       ...prev,
-      firstInterview: {
-        ...prev.firstInterview,
-        [name]: value || "",
-      },
+      [name]: value || "",
     }));
-  };
-
-  const firstInterview = interviewData?.firstInterview || {
-    technicalSkills: "",
-    problemSolving: "",
-    logicalThinking: "",
-    leadership: "",
-    careerVision: "",
   };
 
   return (
@@ -28,7 +19,7 @@ function FirstInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="technicalSkills"
-          value={firstInterview.technicalSkills}
+          value={firstInterviewData.technicalSkills}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
@@ -38,7 +29,7 @@ function FirstInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="problemSolving"
-          value={firstInterview.problemSolving}
+          value={firstInterviewData.problemSolving}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
@@ -48,7 +39,7 @@ function FirstInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="logicalThinking"
-          value={firstInterview.logicalThinking}
+          value={firstInterviewData.logicalThinking}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
@@ -58,7 +49,7 @@ function FirstInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="leadership"
-          value={firstInterview.leadership}
+          value={firstInterviewData.leadership}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
@@ -68,7 +59,7 @@ function FirstInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="careerVision"
-          value={firstInterview.careerVision}
+          value={firstInterviewData.careerVision}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />

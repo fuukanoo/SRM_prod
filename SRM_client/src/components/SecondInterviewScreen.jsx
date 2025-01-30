@@ -1,25 +1,14 @@
+// SecondInterviewScreen.jsx
+
 import React from "react";
 
-function SecondInterviewScreen({ interviewData, setInterviewData }) {
-  // デフォルト値を設定し、undefinedを防ぐ
+function SecondInterviewScreen({ secondInterviewData, setSecondInterviewData }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setInterviewData((prev) => ({
+    setSecondInterviewData((prev) => ({
       ...prev,
-      secondInterview: {
-        ...prev.secondInterview,
-        [name]: value || "", // 値が空の場合もデフォルト値を設定
-      },
+      [name]: value || "",
     }));
-  };
-
-  // デフォルト値の確認
-  const secondInterview = interviewData?.secondInterview || {
-    technicalSkills: "",
-    problemSolving: "",
-    logicalThinking: "",
-    leadership: "",
-    careerVision: "",
   };
 
   return (
@@ -30,7 +19,7 @@ function SecondInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="technicalSkills"
-          value={secondInterview.technicalSkills}
+          value={secondInterviewData.technicalSkills}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
@@ -40,7 +29,7 @@ function SecondInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="problemSolving"
-          value={secondInterview.problemSolving}
+          value={secondInterviewData.problemSolving}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
@@ -50,7 +39,7 @@ function SecondInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="logicalThinking"
-          value={secondInterview.logicalThinking}
+          value={secondInterviewData.logicalThinking}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
@@ -60,7 +49,7 @@ function SecondInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="leadership"
-          value={secondInterview.leadership}
+          value={secondInterviewData.leadership}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
@@ -70,7 +59,7 @@ function SecondInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="careerVision"
-          value={secondInterview.careerVision}
+          value={secondInterviewData.careerVision}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />

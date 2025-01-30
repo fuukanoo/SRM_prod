@@ -6,9 +6,12 @@ import ProfileScreen from "./components/ProfileScreen";
 import EntryAdjustmentScreen from "./components/EntryAdjustmentScreen";
 import CasualScreen from "./components/CasualScreen";
 import FirstInterviewScreen from "./components/FirstInterviewScreen";
+import FirstInterviewAdjustmentScreen from "./components/FirstInterviewAdjustmentScreen";
 import SecondInterviewScreen from "./components/SecondInterviewScreen";
-import OtherScreens from "./components/OtherScreens";
+import SecondInterviewAdjustmentScreen from "./components/SecondInterviewAdjustmentScreen";
 import FinalInterviewScreen from "./components/FinalInterviewScreen";
+import FinalInterviewAdjustmentScreen from "./components/FinalInterviewAdjustmentScreen";
+import OtherScreens from "./components/OtherScreens";
 
 function App() {
   const [profileData, setProfileData] = useState({
@@ -30,21 +33,28 @@ function App() {
     notes: "",
   });
 
-  const [interviewData, setInterviewData] = useState({
-    firstInterview: {
-      technicalSkills: "",
-      problemSolving: "",
-      logicalThinking: "",
-      leadership: "",
-      careerVision: "",
-    },
-    secondInterview: {
-      technicalSkills: "",
-      problemSolving: "",
-      logicalThinking: "",
-      leadership: "",
-      careerVision: "",
-    },
+  const [firstInterviewData, setFirstInterviewData] = useState({
+    technicalSkills: "",
+    problemSolving: "",
+    logicalThinking: "",
+    leadership: "",
+    careerVision: "",
+  });
+
+  const [secondInterviewData, setSecondInterviewData] = useState({
+    technicalSkills: "",
+    problemSolving: "",
+    logicalThinking: "",
+    leadership: "",
+    careerVision: "",
+  });
+
+  const [finalInterviewData, setFinalInterviewData] = useState({
+    technicalSkills: "",
+    problemSolving: "",
+    logicalThinking: "",
+    leadership: "",
+    careerVision: "",
   });
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -58,8 +68,8 @@ function App() {
     "調整中",
     "2次面接",
     "調整中",
-    "最終",
-    "調整中",
+    "最終面接",
+    "調整中"
   ]);
 
   const [steps, setSteps] = useState([
@@ -68,17 +78,18 @@ function App() {
     { id: 3, type: 'casual' },
     { id: 4, type: 'other' },
     { id: 5, type: 'firstInterview' },
-    { id: 6, type: 'other' },
+    { id: 6, type: 'firstInterviewAdjustment' },
     { id: 7, type: 'secondInterview' },
-    { id: 8, type: 'other' },
+    { id: 8, type: 'secondInterviewAdjustment' },
     { id: 9, type: 'finalInterview' },
-    { id: 10, type: 'other' },
+    { id: 10, type: 'finalInterviewAdjustment' },
+    { id: 11, type: 'other' },
   ]);
 
   const handleAddStep = () => {
-    const newStepName = `フォロー面談 ${steps.length + 1}`;
+    const newStepName = `フォロー面談 ${stepLabels.length - 10 + 1}`; // ステップラベルの位置に応じて番号を調整
     setStepLabels((prev) => [...prev, newStepName]);
-    setSteps((prev) => [...prev, { id: steps.length + 1, type: 'followUp' }]);
+    setSteps((prev) => [...prev, { id: prev.length + 1, type: 'followUp' }]);
   };
 
   const renderStep = () => {
@@ -99,26 +110,54 @@ function App() {
       case 'firstInterview':
         return (
           <FirstInterviewScreen
-            interviewData={interviewData}
-            setInterviewData={setInterviewData}
+            firstInterviewData={firstInterviewData}
+            setFirstInterviewData={setFirstInterviewData}
+          />
+        );
+      case 'firstInterviewAdjustment':
+        return (
+          <FirstInterviewAdjustmentScreen
+            profileData={profileData}
+            casualData={casualData}
+            firstInterviewData={firstInterviewData}
           />
         );
       case 'secondInterview':
         return (
           <SecondInterviewScreen
-            interviewData={interviewData}
-            setInterviewData={setInterviewData}
+            secondInterviewData={secondInterviewData}
+            setSecondInterviewData={setSecondInterviewData}
+          />
+        );
+      case 'secondInterviewAdjustment':
+        return (
+          <SecondInterviewAdjustmentScreen
+            profileData={profileData}
+            casualData={casualData}
+            firstInterviewData={firstInterviewData}
+            secondInterviewData={secondInterviewData}
           />
         );
       case 'finalInterview':
         return (
           <FinalInterviewScreen
-            interviewData={interviewData}
-            setInterviewData={setInterviewData}
+            finalInterviewData={finalInterviewData}
+            setFinalInterviewData={setFinalInterviewData}
           />
         );
-      case 'other':
+      case 'finalInterviewAdjustment':
+        return (
+          <FinalInterviewAdjustmentScreen
+            profileData={profileData}
+            casualData={casualData}
+            firstInterviewData={firstInterviewData}
+            secondInterviewData={secondInterviewData}
+            finalInterviewData={finalInterviewData}
+          />
+        );
       case 'followUp':
+        return <OtherScreens profileData={profileData} casualData={casualData} />;
+      case 'other':
         return <OtherScreens profileData={profileData} casualData={casualData} />;
       default:
         return <div>ステップが見つかりません。</div>;
@@ -165,7 +204,7 @@ function App() {
             steps={stepLabels}
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
-            onAddStep={handleAddStep}
+            onAddStep={handleAddStep} // onAddStep を渡す
           />
           {/* 現在のステップのコンテンツ */}
           {renderStep()}

@@ -1,23 +1,14 @@
+// FinalInterviewScreen.jsx
+
 import React from "react";
 
-function FinalInterviewScreen({ interviewData, setInterviewData }) {
+function FinalInterviewScreen({ finalInterviewData, setFinalInterviewData }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setInterviewData((prev) => ({
+    setFinalInterviewData((prev) => ({
       ...prev,
-      finalInterview: {
-        ...prev.finalInterview,
-        [name]: value || "",
-      },
+      [name]: value || "",
     }));
-  };
-
-  const finalInterview = interviewData?.finalInterview || {
-    technicalSkills: "",
-    problemSolving: "",
-    logicalThinking: "",
-    leadership: "",
-    careerVision: "",
   };
 
   return (
@@ -28,7 +19,7 @@ function FinalInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="technicalSkills"
-          value={finalInterview.technicalSkills}
+          value={finalInterviewData.technicalSkills}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
@@ -38,7 +29,7 @@ function FinalInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="problemSolving"
-          value={finalInterview.problemSolving}
+          value={finalInterviewData.problemSolving}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
@@ -48,7 +39,7 @@ function FinalInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="logicalThinking"
-          value={finalInterview.logicalThinking}
+          value={finalInterviewData.logicalThinking}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
@@ -58,7 +49,7 @@ function FinalInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="leadership"
-          value={finalInterview.leadership}
+          value={finalInterviewData.leadership}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
@@ -68,7 +59,7 @@ function FinalInterviewScreen({ interviewData, setInterviewData }) {
         <input
           type="text"
           name="careerVision"
-          value={finalInterview.careerVision}
+          value={finalInterviewData.careerVision}
           onChange={handleInputChange}
           style={{ width: "100%", marginBottom: "10px" }}
         />
