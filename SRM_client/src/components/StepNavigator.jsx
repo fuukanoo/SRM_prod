@@ -14,10 +14,10 @@ function StepNavigator({ steps, currentStep, setCurrentStep, onAddStep }) {
             {step}
           </button>
         ))}
-      </div>
-      <button className="add-button" onClick={onAddStep}>
+        <button className="add-button" onClick={onAddStep}>
         ＋ フォロー面談追加
-      </button>
+        </button>
+      </div>
     </div>
   );
 }

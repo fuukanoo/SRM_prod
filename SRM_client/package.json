@@ -17,6 +17,10 @@
   "author": "Your Name",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.2",
+    "@mui/material": "^6.4.2",
     "axios": "^1.2.0",
     "nth-check": "^2.1.1",
     "postcss": "^8.5.1",
@@ -38,5 +42,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  } 
+  }
 }
