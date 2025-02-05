@@ -8,9 +8,6 @@ function EntryAdjustmentScreen({ profileData }) {
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        調整中 - エントリー情報
-      </Typography>
 
       {/* 写真表示 */}
       <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>

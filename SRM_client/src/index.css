@@ -60,11 +60,13 @@ body, html {
 .step-container {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* 中央寄せから左寄せに変更 */
   gap: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* 折り返さず1行に並ぶ */
   padding: 10px 0;
+  overflow-x: auto; /* 横スクロールバーを有効化 */
 }
+
 
 .step {
   padding: 10px 15px;
@@ -162,3 +164,4 @@ body, html {
   background-position: center;
   border: 1px solid #ccc;
 }
+
