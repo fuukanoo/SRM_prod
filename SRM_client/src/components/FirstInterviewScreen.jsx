@@ -1,6 +1,5 @@
-// FirstInterviewScreen.jsx
-
 import React from "react";
+import { Container, Box, Typography, TextField } from "@mui/material";
 
 function FirstInterviewScreen({ firstInterviewData, setFirstInterviewData }) {
   const handleInputChange = (e) => {
@@ -12,59 +11,58 @@ function FirstInterviewScreen({ firstInterviewData, setFirstInterviewData }) {
   };
 
   return (
-    <div className="container">
-      <h2>一次面接</h2>
-      <div>
-        <label>専門知識・技術力:</label>
-        <input
-          type="text"
+    <Container maxWidth="sm" sx={{ py: 4 }}>
+      <Typography variant="h4" gutterBottom>
+        一次面接
+      </Typography>
+      <Box component="form" noValidate autoComplete="off">
+        <TextField
+          fullWidth
+          label="専門知識・技術力"
           name="technicalSkills"
           value={firstInterviewData.technicalSkills}
           onChange={handleInputChange}
-          style={{ width: "100%", marginBottom: "10px" }}
+          margin="normal"
+          variant="outlined"
         />
-      </div>
-      <div>
-        <label>問題解決能力:</label>
-        <input
-          type="text"
+        <TextField
+          fullWidth
+          label="問題解決能力"
           name="problemSolving"
           value={firstInterviewData.problemSolving}
           onChange={handleInputChange}
-          style={{ width: "100%", marginBottom: "10px" }}
+          margin="normal"
+          variant="outlined"
         />
-      </div>
-      <div>
-        <label>論理的思考力:</label>
-        <input
-          type="text"
+        <TextField
+          fullWidth
+          label="論理的思考力"
           name="logicalThinking"
           value={firstInterviewData.logicalThinking}
           onChange={handleInputChange}
-          style={{ width: "100%", marginBottom: "10px" }}
+          margin="normal"
+          variant="outlined"
         />
-      </div>
-      <div>
-        <label>リーダーシップ・主体性:</label>
-        <input
-          type="text"
+        <TextField
+          fullWidth
+          label="リーダーシップ・主体性"
           name="leadership"
           value={firstInterviewData.leadership}
           onChange={handleInputChange}
-          style={{ width: "100%", marginBottom: "10px" }}
+          margin="normal"
+          variant="outlined"
         />
-      </div>
-      <div>
-        <label>キャリアビジョン:</label>
-        <input
-          type="text"
+        <TextField
+          fullWidth
+          label="キャリアビジョン"
           name="careerVision"
           value={firstInterviewData.careerVision}
           onChange={handleInputChange}
-          style={{ width: "100%", marginBottom: "10px" }}
+          margin="normal"
+          variant="outlined"
         />
-      </div>
-    </div>
+      </Box>
+    </Container>
   );
 }
 

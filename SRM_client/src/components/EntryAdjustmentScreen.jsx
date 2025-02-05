@@ -1,4 +1,5 @@
 import React from "react";
+import { Container, Box, Typography, Link } from "@mui/material";
 
 function EntryAdjustmentScreen({ profileData }) {
   const photoPreviewUrl = profileData.photo
@@ -6,16 +7,19 @@ function EntryAdjustmentScreen({ profileData }) {
     : null;
 
   return (
-    <div className="container">
-      <h2>調整中 - エントリー情報</h2>
+    <Container maxWidth="md" sx={{ py: 4 }}>
+      <Typography variant="h4" gutterBottom>
+        調整中 - エントリー情報
+      </Typography>
+
       {/* 写真表示 */}
-      <div style={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
-        <div
-          style={{
-            width: "120px",
-            height: "160px",
+      <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+        <Box
+          sx={{
+            width: 120,
+            height: 160,
             backgroundColor: "#e0e0e0",
-            borderRadius: "5px",
+            borderRadius: 1,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -23,59 +27,65 @@ function EntryAdjustmentScreen({ profileData }) {
             backgroundSize: "cover",
             backgroundPosition: "center",
             border: "1px solid #ccc",
-            marginRight: "20px",
+            mr: 2,
           }}
         >
-          {!photoPreviewUrl && <p>写真未挿入</p>}
-        </div>
-      </div>
+          {!photoPreviewUrl && (
+            <Typography variant="body2" align="center">
+              写真未挿入
+            </Typography>
+          )}
+        </Box>
+      </Box>
 
       {/* エントリー情報 */}
-      <div className="info-section">
-        <p>
+      <Box sx={{ pl: 1 }}>
+        <Typography variant="body1">
           <strong>氏名:</strong> {profileData.name || "未入力"}
-        </p>
-        <p>
+        </Typography>
+        <Typography variant="body1">
           <strong>フリガナ:</strong> {profileData.furigana || "未入力"}
-        </p>
-        <p>
+        </Typography>
+        <Typography variant="body1">
           <strong>最終学歴:</strong> {profileData.education || "未入力"}
-        </p>
-        <p>
+        </Typography>
+        <Typography variant="body1">
           <strong>職務経歴:</strong> {profileData.career || "未入力"}
-        </p>
-        <p>
-          <strong>履歴書:</strong> {profileData.resume ? (
-            <span
+        </Typography>
+        <Typography variant="body1">
+          <strong>履歴書:</strong>{" "}
+          {profileData.resume ? (
+            <Link
               onClick={() => {
                 const fileURL = URL.createObjectURL(profileData.resume);
                 window.open(fileURL, "_blank");
               }}
-              style={{ cursor: "pointer", color: "#007bff" }}
+              sx={{ cursor: "pointer", color: "#007bff" }}
             >
               📎
-            </span>
+            </Link>
           ) : (
             "未アップロード"
           )}
-        </p>
-        <p>
-          <strong>職務経歴書:</strong> {profileData.careerSheet ? (
-            <span
+        </Typography>
+        <Typography variant="body1">
+          <strong>職務経歴書:</strong>{" "}
+          {profileData.careerSheet ? (
+            <Link
               onClick={() => {
                 const fileURL = URL.createObjectURL(profileData.careerSheet);
                 window.open(fileURL, "_blank");
               }}
-              style={{ cursor: "pointer", color: "#007bff" }}
+              sx={{ cursor: "pointer", color: "#007bff" }}
             >
               📎
-            </span>
+            </Link>
           ) : (
             "未アップロード"
           )}
-        </p>
-      </div>
-    </div>
+        </Typography>
+      </Box>
+    </Container>
   );
 }
 
