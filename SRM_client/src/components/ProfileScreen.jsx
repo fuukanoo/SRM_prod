@@ -73,6 +73,9 @@ function ProfileScreen({ profileData, setProfileData }) {
         </Grid>
 
         {/* 右側セクション */}
+
+
+
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 3, boxShadow: 3 }}>
             <CardContent>
