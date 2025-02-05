@@ -257,32 +257,20 @@ function App() {
                     {!photoPreviewUrl && <Typography variant="body2">写真未挿入</Typography>}
                   </Box>
                   <Box>
-                    <TextField
-                      fullWidth
-                      label="ふりがな"
-                      name="furigana"
-                      value={profileData.furigana}
-                      onChange={handleInputChange}
-                      placeholder="やまだ たろう"
-                      variant="outlined"
-                    />
-                    <TextField
-                      fullWidth
-                      label="名前"
-                      name="name"
-                      value={profileData.name}
-                      onChange={handleInputChange}
-                      placeholder="山田 太郎"
-                      variant="outlined"
-                      sx={{ mt: 2 }}
-                    />
+                    <Typography variant="body2" color="text.secondary">
+                      {profileData.furigana || "ふりがな"}
+                    </Typography>
+                    <Typography variant="h6" sx={{ mt: 1 }}>
+                      {profileData.name || "名前"}
+                    </Typography>
+                  </Box>
                     {/* <Typography variant="body2" color="text.secondary">
                       {profileData.furigana || "やまだ たろう"}
                     </Typography>
                     <Typography variant="h6" sx={{ mt: 1 }}>
                       {profileData.name || "山田 太郎"}
                     </Typography> */}
-                  </Box>
+                  
                 </Box>
                 <input
                   type="file"

@@ -10,7 +10,7 @@ function EntryAdjustmentScreen({ profileData }) {
     <Container maxWidth="md" sx={{ py: 4 }}>
 
       {/* 写真表示 */}
-      <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+      {/* <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
         <Box
           sx={{
             width: 120,
@@ -33,10 +33,10 @@ function EntryAdjustmentScreen({ profileData }) {
             </Typography>
           )}
         </Box>
-      </Box>
+      </Box> */}
 
       {/* エントリー情報 */}
-      <Box sx={{ pl: 1 }}>
+      {/* <Box sx={{ pl: 1 }}>
         <Typography variant="body1">
           <strong>氏名:</strong> {profileData.name || "未入力"}
         </Typography>
@@ -81,7 +81,7 @@ function EntryAdjustmentScreen({ profileData }) {
             "未アップロード"
           )}
         </Typography>
-      </Box>
+      </Box> */}
     </Container>
   );
 }
