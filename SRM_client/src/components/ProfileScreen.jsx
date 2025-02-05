@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { TextField, Button, Card, CardContent, Typography, Box, Grid, Container, Divider } from "@mui/material";
+import "./ProfileScreen.css";
 
 function ProfileScreen({ profileData, setProfileData }) {
   const fileInputRef = useRef(null);
