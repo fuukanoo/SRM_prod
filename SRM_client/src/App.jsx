@@ -178,25 +178,25 @@ function App() {
       const fixedHeight = 720;
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
-
+  
       const scaleX = windowWidth / fixedWidth;
       const scaleY = windowHeight / fixedHeight;
-
-      const newScale = Math.min(scaleX, scaleY);
+  
+      // 画面が小さい場合は縮小、大きい場合は拡大しない（最大値は 1）
+      const newScale = Math.min(scaleX, scaleY, 1);
       setScale(newScale);
     };
-
+  
     // 初回レンダリング時にスケールを設定
     updateScale();
-
-    // リサイズ時にスケールを更新
+  
+    // ウィンドウリサイズ時にスケールを更新
     window.addEventListener("resize", updateScale);
-
+  
     // クリーンアップ
     return () => window.removeEventListener("resize", updateScale);
   }, []);
-
-
+  
   const photoPreviewUrl = profileData.photo ? URL.createObjectURL(profileData.photo) : null;
   const fileInputRef = useRef(null);
   const handleInputChange = (e) => {
