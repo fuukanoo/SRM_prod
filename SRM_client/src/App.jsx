@@ -219,15 +219,21 @@ function App() {
         }}
       >
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h5" gutterBottom sx={{ fontSize: '1.2rem' }}>
             個人プロフィール
           </Typography>
-          <Divider sx={{ mb: 3 }} />
+          <Divider sx={{ mb: 1.25 }} />
           <Grid container spacing={4}>
             {/* 左側セクション */}
 
             <Grid item xs={12} md={4}>
-              <Card sx={{ p: 3, boxShadow: 3 }}>
+              <Card
+                sx={{
+                  p: { xs: 2, md: 2 },                // パディングを画面サイズに応じて調整
+                  boxShadow: 3,
+                  maxHeight: { xs: '80vh', md: '90vh' }, // 高さの制限とレスポンシブ調整
+                }}
+              >
                 {/* 写真と名前の部分 */}
                 <Box
                   sx={{
@@ -238,9 +244,9 @@ function App() {
                 >
                   <Box
                     sx={{
-                      width: 120,
-                      height: 160,
-                      flexShrink: 0, // 追加：サイズの縮小を防ぐ
+                      width: { xs: 90, md: 90 },          // 幅を画面サイズに合わせて調整
+                      height: { xs: 120, md: 120 },          // 高さも同様に調整
+                      flexShrink: 0,
                       backgroundColor: "#f5f5f5",
                       borderRadius: "8px",
                       display: "flex",
@@ -254,15 +260,28 @@ function App() {
                     }}
                     onClick={() => fileInputRef.current.click()}
                   >
-                    {!photoPreviewUrl && <Typography variant="body2">写真未挿入</Typography>}
+                    {!photoPreviewUrl && (
+                      <Typography variant="body2" sx={{ fontSize: { xs: '0.7rem', md: '0.8rem' } }}>
+                        写真未挿入
+                      </Typography>
+                    )}
                   </Box>
+
                   <Box>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{ fontSize: { xs: '0.7rem', md: '0.8rem' } }}
+                    >
                       {profileData.furigana || "ふりがな"}
                     </Typography>
-                    <Typography variant="h6" sx={{ mt: 1 }}>
+                    <Typography
+                      variant="h6"
+                      sx={{ mt: { xs: 0.5, md: 1 }, fontSize: { xs: '1rem', md: '2.5rem' } }}
+                    >
                       {profileData.name || "名前"}
                     </Typography>
+
                   </Box>
                     {/* <Typography variant="body2" color="text.secondary">
                       {profileData.furigana || "やまだ たろう"}
@@ -282,7 +301,7 @@ function App() {
                 />
 
                 {/* Divider で区切り */}
-                <Divider sx={{ my: 2 }} />
+                <Divider sx={{ my: 1 }} />
 
                 {/* 追加の項目群 */}
                 <Grid container spacing={1}>
@@ -294,16 +313,30 @@ function App() {
                       value={profileData.career || ""}
                       onChange={handleInputChange}
                       variant="outlined"
+                      sx={{
+                        '& .MuiInputBase-input': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                          padding: { xs: '6px 8px', md: '6px 8px' },
+                        },
+                        '& .MuiInputLabel-root': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                        },
+                        '& .MuiOutlinedInput-root': {
+                          height: { xs: '40px', md: '40px' },
+                        },
+                      }}
                     />
+
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
-                    <Button variant="contained" component="label" fullWidth>
+                    <Button variant="contained" component="label" fullWidth sx={{ fontSize: { xs: '0.8rem', md: '0.8rem' } }}>
                       履歴書
                       <input type="file" name="resume" hidden onChange={handleFileUpload} />
                     </Button>
+
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
-                    <Button variant="contained" component="label" fullWidth>
+                    <Button variant="contained" component="label" fullWidth sx={{ fontSize: { xs: '0.8rem', md: '0.8rem' } }}>
                       職務経歴書
                       <input type="file" name="careerSheet" hidden onChange={handleFileUpload} />
                     </Button>
@@ -316,6 +349,18 @@ function App() {
                       value={profileData.route || ""}
                       onChange={handleInputChange}
                       variant="outlined"
+                      sx={{
+                        '& .MuiInputBase-input': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                          padding: { xs: '6px 8px', md: '6px 8px' },
+                        },
+                        '& .MuiInputLabel-root': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                        },
+                        '& .MuiOutlinedInput-root': {
+                          height: { xs: '40px', md: '40px' },
+                        },
+                      }}
                     />
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
@@ -326,6 +371,18 @@ function App() {
                       value={profileData.birthdate || ""}
                       onChange={handleInputChange}
                       variant="outlined"
+                      sx={{
+                        '& .MuiInputBase-input': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                          padding: { xs: '6px 8px', md: '6px 8px' },
+                        },
+                        '& .MuiInputLabel-root': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                        },
+                        '& .MuiOutlinedInput-root': {
+                          height: { xs: '40px', md: '40px' },
+                        },
+                      }}
                     />
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
@@ -336,6 +393,18 @@ function App() {
                       value={profileData.address || ""}
                       onChange={handleInputChange}
                       variant="outlined"
+                      sx={{
+                        '& .MuiInputBase-input': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                          padding: { xs: '6px 8px', md: '6px 8px' },
+                        },
+                        '& .MuiInputLabel-root': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                        },
+                        '& .MuiOutlinedInput-root': {
+                          height: { xs: '40px', md: '40px' },
+                        },
+                      }}
                     />
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
@@ -346,6 +415,18 @@ function App() {
                       value={profileData.origin || ""}
                       onChange={handleInputChange}
                       variant="outlined"
+                      sx={{
+                        '& .MuiInputBase-input': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                          padding: { xs: '6px 8px', md: '6px 8px' },
+                        },
+                        '& .MuiInputLabel-root': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                        },
+                        '& .MuiOutlinedInput-root': {
+                          height: { xs: '40px', md: '40px' },
+                        },
+                      }}
                     />
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
@@ -356,6 +437,18 @@ function App() {
                       value={profileData.employmentStatus || ""}
                       onChange={handleInputChange}
                       variant="outlined"
+                      sx={{
+                        '& .MuiInputBase-input': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                          padding: { xs: '6px 8px', md: '6px 8px' },
+                        },
+                        '& .MuiInputLabel-root': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                        },
+                        '& .MuiOutlinedInput-root': {
+                          height: { xs: '40px', md: '40px' },
+                        },
+                      }}
                     />
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
@@ -366,6 +459,18 @@ function App() {
                       value={profileData.university || ""}
                       onChange={handleInputChange}
                       variant="outlined"
+                      sx={{
+                        '& .MuiInputBase-input': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                          padding: { xs: '6px 8px', md: '6px 8px' },
+                        },
+                        '& .MuiInputLabel-root': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                        },
+                        '& .MuiOutlinedInput-root': {
+                          height: { xs: '40px', md: '40px' },
+                        },
+                      }}
                     />
                   </Grid>
                   <Grid item xs={12} sm={12} md={12}>
@@ -376,6 +481,18 @@ function App() {
                       value={profileData.highSchool || ""}
                       onChange={handleInputChange}
                       variant="outlined"
+                      sx={{
+                        '& .MuiInputBase-input': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                          padding: { xs: '6px 8px', md: '6px 8px' },
+                        },
+                        '& .MuiInputLabel-root': {
+                          fontSize: { xs: '0.8rem', md: '0.8rem' },
+                        },
+                        '& .MuiOutlinedInput-root': {
+                          height: { xs: '40px', md: '40px' },
+                        },
+                      }}
                     />
                   </Grid>
                 </Grid>
