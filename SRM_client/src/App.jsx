@@ -5,6 +5,7 @@ import StepNavigator from "./components/StepNavigator";
 import ProfileScreen from "./components/ProfileScreen";
 import EntryAdjustmentScreen from "./components/EntryAdjustmentScreen";
 import CasualScreen from "./components/CasualScreen";
+import CasualAdjustmentScreen from "./components/CasualAdjustmentScreen";
 import FirstInterviewScreen from "./components/FirstInterviewScreen";
 import FirstInterviewAdjustmentScreen from "./components/FirstInterviewAdjustmentScreen";
 import SecondInterviewScreen from "./components/SecondInterviewScreen";
@@ -79,7 +80,7 @@ function App() {
     { id: 1, type: 'profile' },
     { id: 2, type: 'entryAdjustment' },
     { id: 3, type: 'casual' },
-    { id: 4, type: 'other' },
+    { id: 4, type: 'casualAdjustment' },
     { id: 5, type: 'firstInterview' },
     { id: 6, type: 'firstInterviewAdjustment' },
     { id: 7, type: 'secondInterview' },
@@ -113,6 +114,8 @@ function App() {
             setCasualData={setCasualData}
           />
         );
+      case 'casualAdjustment':
+        return <CasualAdjustmentScreen profileData={profileData} casualData={casualData} />;
       case 'firstInterview':
         return (
           <FirstInterviewScreen
