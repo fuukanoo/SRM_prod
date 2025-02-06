@@ -285,8 +285,8 @@ function App() {
                 <Divider sx={{ my: 2 }} />
 
                 {/* 追加の項目群 */}
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
+                <Grid container spacing={1}>
+                  <Grid item xs={12} sm={12} md={12}>
                     <TextField
                       fullWidth
                       label="職務経歴"
@@ -296,19 +296,19 @@ function App() {
                       variant="outlined"
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={12} md={12}>
                     <Button variant="contained" component="label" fullWidth>
                       履歴書
                       <input type="file" name="resume" hidden onChange={handleFileUpload} />
                     </Button>
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={12} md={12}>
                     <Button variant="contained" component="label" fullWidth>
                       職務経歴書
                       <input type="file" name="careerSheet" hidden onChange={handleFileUpload} />
                     </Button>
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={12} md={12}>
                     <TextField
                       fullWidth
                       label="経路"
@@ -318,7 +318,7 @@ function App() {
                       variant="outlined"
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={12} md={12}>
                     <TextField
                       fullWidth
                       label="生年月日"
@@ -328,7 +328,7 @@ function App() {
                       variant="outlined"
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={12} md={12}>
                     <TextField
                       fullWidth
                       label="住所"
@@ -338,7 +338,7 @@ function App() {
                       variant="outlined"
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={12} md={12}>
                     <TextField
                       fullWidth
                       label="出身"
@@ -348,7 +348,7 @@ function App() {
                       variant="outlined"
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={12} md={12}>
                     <TextField
                       fullWidth
                       label="就業状況"
@@ -358,7 +358,7 @@ function App() {
                       variant="outlined"
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={12} md={12}>
                     <TextField
                       fullWidth
                       label="大学"
@@ -368,7 +368,7 @@ function App() {
                       variant="outlined"
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={12} md={12}>
                     <TextField
                       fullWidth
                       label="高校"
