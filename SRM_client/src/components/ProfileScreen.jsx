@@ -36,7 +36,9 @@ function ProfileScreen({ profileData, setProfileData }) {
         <Grid item xs={12}>
           <Card sx={{ p: 3, boxShadow: 3 }}>
             <CardContent>
+
               {/* 写真と名前の入力欄 */}
+              
               <Box
                 sx={{
                   display: "flex",
