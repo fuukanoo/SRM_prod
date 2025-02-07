@@ -15,7 +15,7 @@ import FinalInterviewAdjustmentScreen from "./components/FinalInterviewAdjustmen
 import OtherScreens from "./components/OtherScreens";
 
 // import "./components/ProfileScreen.css";
-import { TextField, Button, Card, CardContent, Typography, Box, Grid, Container, Divider } from "@mui/material";
+import { TextField, Button, Card, CardContent, Typography, Box, Grid, Container, Divider, Link } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
@@ -347,19 +347,100 @@ const handleAddStep = () => {
                       )}
 
                     </Grid>
-                    <Grid item xs={12} sm={12} md={12}>
-                      <Button variant="contained" component="label" fullWidth sx={{ fontSize: { xs: '0.8rem', md: '0.8rem' } }}>
-                        履歴書
-                        <input type="file" name="resume" hidden onChange={handleFileUpload} />
-                      </Button>
 
-                    </Grid>
+
+
+
                     <Grid item xs={12} sm={12} md={12}>
-                      <Button variant="contained" component="label" fullWidth sx={{ fontSize: { xs: '0.8rem', md: '0.8rem' } }}>
-                        職務経歴書
-                        <input type="file" name="careerSheet" hidden onChange={handleFileUpload} />
-                      </Button>
+                      {isSubmitted ? (
+                        <Typography variant="body1">
+                          <strong>履歴書:</strong>{" "}
+                          {profileData.resume ? (
+                            <Link
+                              onClick={() => {
+                                const fileURL = URL.createObjectURL(profileData.resume);
+                                window.open(fileURL, "_blank");
+                              }}
+                              sx={{ cursor: "pointer", color: "#007bff" }}
+                            >
+                              📎 {profileData.resume.name}
+                            </Link>
+                          ) : (
+                            "未アップロード"
+                          )}
+                        </Typography>
+                      ) : (
+                        <>
+                          <Button
+                            variant="contained"
+                            component="label"
+                            fullWidth
+                            sx={{ fontSize: { xs: "0.8rem", md: "0.8rem" } }}
+                          >
+                            履歴書をアップロード
+                            <input
+                              type="file"
+                              name="resume"
+                              hidden
+                              onChange={handleFileUpload}
+                            />
+                          </Button>
+                          {profileData.resume && (
+                            <Typography variant="body2" sx={{ mt: 0.5 }}>
+                              アップロード済み: {profileData.resume.name}
+                            </Typography>
+                          )}
+                        </>
+                      )}
                     </Grid>
+
+                    // 職務経歴書フィールド
+                    <Grid item xs={12} sm={12} md={12}>
+                      {isSubmitted ? (
+                        <Typography variant="body1">
+                          <strong>職務経歴書:</strong>{" "}
+                          {profileData.careerSheet ? (
+                            <Link
+                              onClick={() => {
+                                const fileURL = URL.createObjectURL(profileData.careerSheet);
+                                window.open(fileURL, "_blank");
+                              }}
+                              sx={{ cursor: "pointer", color: "#007bff" }}
+                            >
+                              📎 {profileData.careerSheet.name}
+                            </Link>
+                          ) : (
+                            "未アップロード"
+                          )}
+                        </Typography>
+                      ) : (
+                        <>
+                          <Button
+                            variant="contained"
+                            component="label"
+                            fullWidth
+                            sx={{ fontSize: { xs: "0.8rem", md: "0.8rem" } }}
+                          >
+                            職務経歴書をアップロード
+                            <input
+                              type="file"
+                              name="careerSheet"
+                              hidden
+                              onChange={handleFileUpload}
+                            />
+                          </Button>
+                          {profileData.careerSheet && (
+                            <Typography variant="body2" sx={{ mt: 0.5 }}>
+                              アップロード済み: {profileData.careerSheet.name}
+                            </Typography>
+                          )}
+                        </>
+                      )}
+                    </Grid>
+
+
+
+
                     <Grid item xs={12} sm={12} md={12}>
                       { isSubmitted ? (
                         // 表示専用モード：入力済みの「職務経歴」を表示
