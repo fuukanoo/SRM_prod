@@ -49,7 +49,7 @@ function getRouteByStep(index) {
     case 9:
       return "/finalInterviewAdjustment";
     default:
-      return "/other";
+      return `/followup/${index - 9}`;
   }
 }
 

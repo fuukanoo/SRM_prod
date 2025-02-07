@@ -93,14 +93,34 @@ function App() {
     { id: 11, type: 'other' },
   ]);
 
-  // フォロー面談の追加
-  const handleAddStep = () => {
-    const newStepIndex = steps.length;
-    const newStepName = `フォロー面談 ${newStepIndex - 10}`;
-    setStepLabels((prev) => [...prev, newStepName]);
-    setSteps((prev) => [...prev, { id: newStepIndex, type: "followUp" }]);
-    setCurrentStep(newStepIndex);
-  };
+  // // フォロー面談の追加
+  // const handleAddStep = () => {
+  //   const newStepIndex = steps.length;
+  //   const newStepName = `フォロー面談 ${newStepIndex - 10}`;
+  //   setStepLabels((prev) => [...prev, newStepName]);
+  //   setSteps((prev) => [...prev, { id: newStepIndex, type: "followUp" }]);
+  //   setCurrentStep(newStepIndex);
+  // };
+
+
+
+
+  // 例: handleAddStep の修正例
+const handleAddStep = () => {
+  // 既存のフォロー面談ステップ数を数える
+  const followupCount = steps.filter(step => step.type.startsWith("followUp")).length;
+  const followupNumber = followupCount + 1; // 新たな番号を付与
+  const newStepName = `フォロー面談 ${followupNumber}`;
+  
+  // 新規ステップの type を "followUp" + 番号 に設定
+  setStepLabels(prev => [...prev, newStepName]);
+  setSteps(prev => [...prev, { id: prev.length + 1, type: `followUp${followupNumber}` }]);
+  setCurrentStep(steps.length);
+};
+
+
+
+
 
 
   const [scale, setScale] = useState(1);
@@ -202,21 +222,83 @@ function App() {
                     </Box>
 
                     <Box>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{ fontSize: { xs: '0.7rem', md: '0.8rem' } }}
-                      >
-                        {profileData.furigana || "ふりがな"}
-                      </Typography>
-                      <Typography
-                        variant="h6"
-                        sx={{ mt: { xs: 0.5, md: 1 }, fontSize: { xs: '1rem', md: '2.5rem' } }}
-                      >
-                        {profileData.name || "名前"}
-                      </Typography>
+                      {isSubmitted ? (
+                        <>
+                          {/* 表示専用モード：ふりがな */}
+                          <Typography
+                            fullWidth
+                            variant="body2"
+                            color="text.secondary"
+                            sx={{
+                              fontSize: { xs: '0.7rem', md: '0.7rem' },
+                              height: { xs: '30px', md: '15px' },
+                              padding: '8px',
+                            }}
+                          >
+                            {profileData.furigana || "ふりがな"}
+                          </Typography>
 
+                          {/* 表示専用モード：名前 */}
+                          <Typography
+                            fullWidth
+                            variant="h6"
+                            sx={{
+                              mt: { xs: 0.5, md: 1 },
+                              fontSize: { xs: '1rem', md: '2rem' },
+                              height: { xs: '40px', md: '50px' },
+                              padding: '8px',
+                            }}
+                          >
+                            {profileData.name || "名前"}
+                          </Typography>
+                        </>
+                        ) : (
+                        <>
+                          {/* 編集モード：ふりがなのTextField */}
+                          <TextField
+                            fullWidth
+                            label="ふりがな"
+                            name="furigana"
+                            value={profileData.furigana || ""}
+                            onChange={handleInputChange}
+                            variant="outlined"
+                            sx={{
+                              '& .MuiInputBase-input': {
+                                fontSize: { xs: '0.7rem', md: '0.7rem' },
+                                height: { xs: '30px', md: '15px' }, // 入力部分の高さを調整
+                                padding: '8px',
+                              },
+                              '& .MuiInputLabel-root': {
+                                fontSize: { xs: '0.7rem', md: '0.7rem' },
+                              },
+                            }}
+                          />
+
+                          {/* 編集モード：名前のTextField */}
+                          <TextField
+                            fullWidth
+                            label="名前"
+                            name="name"
+                            value={profileData.name || ""}
+                            onChange={handleInputChange}
+                            variant="outlined"
+                            sx={{
+                              mt: { xs: 0.5, md: 1 },
+                              '& .MuiInputBase-input': {
+                                fontSize: { xs: '1rem', md: '2rem' },
+                                height: { xs: '40px', md: '50px' }, // 入力部分の高さを調整
+                                padding: '8px',
+                              },
+                              '& .MuiInputLabel-root': {
+                                fontSize: { xs: '1rem', md: '1rem' },
+                              },
+                            }}
+                          />
+                        </>
+                      )}
                     </Box>
+
+
 
                     
                   </Box>
@@ -529,7 +611,8 @@ function App() {
                   <Route path="/secondInterviewAdjustment" element={<SecondInterviewAdjustmentScreen profileData={profileData} casualData={casualData} firstInterviewData={firstInterviewData} secondInterviewData={secondInterviewData} />} />
                   <Route path="/finalInterview" element={<FinalInterviewScreen finalInterviewData={finalInterviewData} setFinalInterviewData={setFinalInterviewData} />} />
                   <Route path="/finalInterviewAdjustment" element={<FinalInterviewAdjustmentScreen profileData={profileData} casualData={casualData} firstInterviewData={firstInterviewData} secondInterviewData={secondInterviewData} finalInterviewData={finalInterviewData} />} />
-                  <Route path="/other" element={<OtherScreens profileData={profileData} casualData={casualData} />} />
+                  {/* <Route path="/other" element={<OtherScreens profileData={profileData} casualData={casualData} />} /> */}
+                  <Route path="/followup/:followupId" element={<OtherScreens profileData={profileData} casualData={casualData} />} />
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
               </Grid>
