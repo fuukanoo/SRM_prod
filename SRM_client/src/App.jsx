@@ -653,10 +653,18 @@ const handleAddStep = () => {
                         />
                       )}
                       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
+                        {/* 編集ボタンの追加 */}
+                        <Button
+                          variant="outlined"
+                          onClick={() => setIsSubmitted(false)}
+                          sx={{ fontSize: { xs: '0.8rem', md: '0.8rem' }, ml: 1 }}
+                        >
+                          編集
+                        </Button>
                         <Button
                           variant="contained"
                           onClick={() => setIsSubmitted(true)}
-                          sx={{ fontSize: { xs: '0.8rem', md: '0.8rem' } }}
+                          sx={{ fontSize: { xs: '0.8rem', md: '0.8rem' }, ml: 1 }}
                         >
                           登録
                         </Button>
