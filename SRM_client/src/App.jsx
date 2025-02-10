@@ -185,7 +185,8 @@ const handleAddStep = () => {
                   sx={{
                     p: { xs: 2, md: 2 },                // パディングを画面サイズに応じて調整
                     boxShadow: 3,
-                    maxHeight: { xs: '80vh', md: '90vh' }, // 高さの制限とレスポンシブ調整
+                    maxHeight: { xs: '80vh', md: '72vh' }, // 高さの制限とレスポンシブ調整
+                    overflowY: 'auto',
                   }}
                 >
                   {/* 写真と名前の部分 */}
@@ -195,11 +196,11 @@ const handleAddStep = () => {
                       alignItems: "flex-end",
                       gap: 2,
                     }}
-                  >
+                  >                   
                     <Box
                       sx={{
                         width: { xs: 90, md: 90 },          // 幅を画面サイズに合わせて調整
-                        height: { xs: 120, md: 120 },          // 高さも同様に調整
+                        height: { xs: 120, md: 120 },         // 高さも同様に調整
                         flexShrink: 0,
                         backgroundColor: "#f5f5f5",
                         borderRadius: "8px",
@@ -210,9 +211,9 @@ const handleAddStep = () => {
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         border: "2px solid #ddd",
-                        cursor: "pointer",
+                        cursor: isSubmitted ? "default" : "pointer", // 表示専用の場合はクリック不可
                       }}
-                      onClick={() => fileInputRef.current.click()}
+                      onClick={isSubmitted ? undefined : () => fileInputRef.current.click()}
                     >
                       {!photoPreviewUrl && (
                         <Typography variant="body2" sx={{ fontSize: { xs: '0.7rem', md: '0.8rem' } }}>
@@ -220,6 +221,7 @@ const handleAddStep = () => {
                         </Typography>
                       )}
                     </Box>
+
 
                     <Box>
                       {isSubmitted ? (
@@ -394,7 +396,7 @@ const handleAddStep = () => {
                       )}
                     </Grid>
 
-                    // 職務経歴書フィールド
+                    {/* 職務経歴書フィールド */}
                     <Grid item xs={12} sm={12} md={12}>
                       {isSubmitted ? (
                         <Typography variant="body1">
@@ -542,8 +544,8 @@ const handleAddStep = () => {
                         <TextField
                           fullWidth
                           label="出身"
-                          name="address"
-                          value={profileData.address || ""}
+                          name="origin"
+                          value={profileData.origin || ""}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -602,8 +604,8 @@ const handleAddStep = () => {
                         <TextField
                           fullWidth
                           label="大学"
-                          name="status"
-                          value={profileData.status || ""}
+                          name="university"
+                          value={profileData.university || ""}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
