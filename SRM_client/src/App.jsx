@@ -64,6 +64,10 @@ function App() {
     careerVision: "",
   });
 
+  const [followupData, setFollowupData] = useState({
+    notes: "",
+  });
+
   const [currentStep, setCurrentStep] = useState(0);
 
   const [stepLabels, setStepLabels] = useState([
@@ -703,7 +707,7 @@ const handleAddStep = () => {
                   <Route path="/finalInterview" element={<FinalInterviewScreen finalInterviewData={finalInterviewData} setFinalInterviewData={setFinalInterviewData} />} />
                   <Route path="/finalInterviewAdjustment" element={<FinalInterviewAdjustmentScreen profileData={profileData} casualData={casualData} firstInterviewData={firstInterviewData} secondInterviewData={secondInterviewData} finalInterviewData={finalInterviewData} />} />
                   {/* <Route path="/other" element={<OtherScreens profileData={profileData} casualData={casualData} />} /> */}
-                  <Route path="/followup/:followupId" element={<OtherScreens profileData={profileData} casualData={casualData} />} />
+                  <Route path="/followup/:followupId" element={<OtherScreens followupData={followupData} setFollowupData={setFollowupData}/>} />
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
               </Grid>

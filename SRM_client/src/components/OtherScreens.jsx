@@ -1,7 +1,17 @@
 import React from "react";
 import { Container, Card, Typography, TextField } from "@mui/material";
 
-function OtherScreens({ profileData, casualData, handleInputChange }) {
+
+function OtherScreens({ followupData, setFollowupData }) {
+  // followupData 用の入力ハンドラーを定義
+  const handleFollowupInputChange = (e) => {
+    const { name, value } = e.target;
+    setFollowupData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
       <Card sx={{ p: 3, boxShadow: 3 }}>
@@ -11,8 +21,8 @@ function OtherScreens({ profileData, casualData, handleInputChange }) {
         <TextField
           fullWidth
           name="notes"
-          value={casualData.notes || ""}
-          onChange={handleInputChange}
+          value={followupData.notes || ""}
+          onChange={handleFollowupInputChange}
           multiline
           rows={5}
           variant="outlined"
