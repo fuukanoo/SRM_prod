@@ -185,7 +185,7 @@ const handleAddStep = () => {
                   sx={{
                     p: { xs: 2, md: 2 },                // パディングを画面サイズに応じて調整
                     boxShadow: 3,
-                    maxHeight: { xs: '80vh', md: '72vh' }, // 高さの制限とレスポンシブ調整
+                    maxHeight: { xs: '80vh', md: '72vh', lg: '68vh' }, // 高さの制限とレスポンシブ調整
                     overflowY: 'auto',
                   }}
                 >
