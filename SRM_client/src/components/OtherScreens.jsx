@@ -1,14 +1,19 @@
 import React from "react";
 import { Container, Card, Typography, TextField } from "@mui/material";
-
+import { useParams } from "react-router-dom";
 
 function OtherScreens({ followupData, setFollowupData }) {
-  // followupData 用の入力ハンドラーを定義
+  // URLから followupId を取得（例: "followUp1", "followUp2" など）
+  const { followupId } = useParams();
+
+  // 現在のフォロー面談のメモ（存在しなければ空文字）
+  const currentNotes = followupData[followupId] || "";
+
   const handleFollowupInputChange = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     setFollowupData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [followupId]: value, // followupId をキーにして更新
     }));
   };
 
@@ -21,7 +26,7 @@ function OtherScreens({ followupData, setFollowupData }) {
         <TextField
           fullWidth
           name="notes"
-          value={followupData.notes || ""}
+          value={currentNotes}
           onChange={handleFollowupInputChange}
           multiline
           rows={5}
