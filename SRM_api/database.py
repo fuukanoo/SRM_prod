@@ -8,15 +8,14 @@ from dotenv import load_dotenv
 # .env ファイルから環境変数をロード
 load_dotenv()
 
-# 環境変数から接続URLを取得（DATABASE_URL が設定されていない場合は例外を発生させる）
 SQLALCHEMY_DATABASE_URL = os.environ.get("DATABASE_URL")
 if not SQLALCHEMY_DATABASE_URL:
     raise Exception("DATABASE_URL is not set in the environment variables.")
 
-# SQLAlchemy エンジンの作成
+# SQLAlchemy エンジンの作成（echo=True で実行されるSQLをログに出力）
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
 
-# SessionLocal を作成
+# データベースセッションの作成
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # モデル定義用の基底クラス

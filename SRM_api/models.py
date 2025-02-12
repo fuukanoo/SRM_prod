@@ -8,7 +8,7 @@ class Candidate(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), nullable=False)
     furigana = Column(String(255))
-    photo_url = Column(String(512))         # 写真のファイルパスやURL
+    photo_url = Column(String(512))         # 写真ファイルの保存場所（パスまたはURL）
     education = Column(Text)
     career = Column(Text)
     resume_url = Column(String(512))        # 履歴書ファイルのパス/URL
