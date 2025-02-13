@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_server
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "0630Natsuki"  # root パスワード（適宜変更してください）
+      MYSQL_DATABASE: srm_db             # 自動作成されるデータベース名
+      MYSQL_USER: srm_user               # 任意のユーザー（オプション）
+      MYSQL_PASSWORD: "your_password"    # srm_user のパスワード（適宜変更してください）
+    ports:
+      - "3306:3306"                     # ホストの 3306 番ポートに MySQL サーバーを公開
+    volumes:
+      - db_data:/var/lib/mysql          # 永続化用のボリューム（データが保持される）
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8080:8080"                     # ホストの 8080 番ポートに Adminer を公開
+
+volumes:
+  db_data:
