@@ -5,8 +5,18 @@ from typing import List
 from database import engine, SessionLocal, Base
 from models import Candidate
 from schemas import CandidateCreate, CandidateSchema
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="SRM API")
+
+# フロントエンドが http://localhost:3000 で動作している場合
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # 開発初期：テーブル作成（本番では Alembic を推奨）
 Base.metadata.create_all(bind=engine)
@@ -59,3 +69,4 @@ def delete_candidate(candidate_id: int, db: Session = Depends(get_db)):
     db.delete(candidate)
     db.commit()
     return {"detail": "Candidate deleted"}
+

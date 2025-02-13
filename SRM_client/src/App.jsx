@@ -27,7 +27,15 @@ function App() {
     career: "",
     resume: null,
     careerSheet: null,
+    route: "",
+    birthdate: "",
+    address: "",
+    origin: "",
+    employmentStatus: "",
+    university: "",
+    highSchool: "",
   });
+  
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -106,7 +114,44 @@ function App() {
   //   setCurrentStep(newStepIndex);
   // };
 
-
+  const handleRegister = async () => {
+    // stateに保持されたprofileDataをバックエンド用に整形
+    const candidateData = {
+      name: profileData.name,
+      furigana: profileData.furigana,
+      photo_url: profileData.photo ? URL.createObjectURL(profileData.photo) : null,
+      education: profileData.education,
+      career: profileData.career,
+      resume_url: profileData.resume ? URL.createObjectURL(profileData.resume) : null,
+      career_sheet_url: profileData.careerSheet ? URL.createObjectURL(profileData.careerSheet) : null,
+      route: profileData.route,
+      birthdate: profileData.birthdate, // "YYYY-MM-DD"形式に整形する場合も検討
+      address: profileData.address,
+      origin: profileData.origin,
+      employment_status: profileData.employmentStatus,
+      university: profileData.university,
+      high_school: profileData.highSchool,
+    };
+    try {
+      const response = await fetch("http://localhost:3001/candidates/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(candidateData)
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Candidate登録成功", data);
+        // 成功時の処理（画面遷移や通知表示など）
+      } else {
+        console.error("登録エラー:", response.statusText);
+      }
+    } catch (error) {
+      console.error("ネットワークエラー:", error);
+    }
+  };
+  
 
 
   // 例: handleAddStep の修正例
@@ -265,7 +310,7 @@ const handleAddStep = () => {
                             fullWidth
                             label="ふりがな"
                             name="furigana"
-                            value={profileData.furigana || ""}
+                            value={profileData.furigana}
                             onChange={handleInputChange}
                             variant="outlined"
                             sx={{
@@ -285,7 +330,7 @@ const handleAddStep = () => {
                             fullWidth
                             label="名前"
                             name="name"
-                            value={profileData.name || ""}
+                            value={profileData.name}
                             onChange={handleInputChange}
                             variant="outlined"
                             sx={{
@@ -334,7 +379,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="職務経歴"
                           name="career"
-                          value={profileData.career || ""}
+                          value={profileData.career}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -459,7 +504,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="経路"
                           name="route"
-                          value={profileData.route || ""}
+                          value={profileData.route}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -489,7 +534,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="生年月日"
                           name="birthdate"
-                          value={profileData.birthdate || ""}
+                          value={profileData.birthdate}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -519,7 +564,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="住所"
                           name="address"
-                          value={profileData.address || ""}
+                          value={profileData.address}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -549,7 +594,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="出身"
                           name="origin"
-                          value={profileData.origin || ""}
+                          value={profileData.origin}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -579,7 +624,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="就業状況"
                           name="employmentStatus"
-                          value={profileData.employmentStatus || ""}
+                          value={profileData.employmentStatus}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -609,7 +654,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="大学"
                           name="university"
-                          value={profileData.university || ""}
+                          value={profileData.university}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -639,7 +684,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="高校"
                           name="highSchool"
-                          value={profileData.highSchool || ""}
+                          value={profileData.highSchool}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -667,7 +712,7 @@ const handleAddStep = () => {
                         </Button>
                         <Button
                           variant="contained"
-                          onClick={() => setIsSubmitted(true)}
+                          onClick={handleRegister}
                           sx={{ fontSize: { xs: '0.8rem', md: '0.8rem' }, ml: 1 }}
                         >
                           登録
