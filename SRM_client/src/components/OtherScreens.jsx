@@ -1,8 +1,8 @@
 import React from "react";
-import { Container, Card, Typography, TextField } from "@mui/material";
+import { Container, Card, Typography, TextField, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 
-function OtherScreens({profileData, followupData, setFollowupData }) {
+function OtherScreens({ profileData, followupData, setFollowupData }) {
   // URLから followupId を取得（例: "followUp1", "followUp2" など）
   const { followupId } = useParams();
 
@@ -13,8 +13,36 @@ function OtherScreens({profileData, followupData, setFollowupData }) {
     const { value } = e.target;
     setFollowupData((prevData) => ({
       ...prevData,
-      [followupId]: value, // followupId をキーにして更新
+      [followupId]: value,
     }));
+  };
+
+  // 「保存」ボタン押下時の処理
+  const handleSaveFollowup = async () => {
+    // profileData.id に候補者登録後のIDがセットされている前提
+    const followupPayload = {
+      candidate_id: profileData.id,
+      notes: currentNotes,
+      // interview_date を入力する場合はここで追加（例: interview_date: "2025-02-14"）
+    };
+
+    console.log("送信前のフォロー面談データ:", followupPayload);
+    try {
+      const response = await fetch("http://localhost:3001/followup_interviews/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(followupPayload),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("フォロー面談データ登録成功", data);
+        // 必要に応じて、成功時の通知表示や画面遷移の処理を追加
+      } else {
+        console.error("フォロー面談データ登録エラー:", response.statusText);
+      }
+    } catch (error) {
+      console.error("ネットワークエラー:", error);
+    }
   };
 
   return (
@@ -32,6 +60,13 @@ function OtherScreens({profileData, followupData, setFollowupData }) {
           rows={5}
           variant="outlined"
         />
+        <Button
+          variant="contained"
+          onClick={handleSaveFollowup}
+          sx={{ mt: 2, fontSize: "0.8rem" }}
+        >
+          保存
+        </Button>
       </Card>
     </Container>
   );
