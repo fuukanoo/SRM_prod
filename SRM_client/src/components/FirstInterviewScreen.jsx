@@ -1,13 +1,44 @@
 import React from "react";
-import { Container, Box, Typography, TextField } from "@mui/material";
+import { Container, Box, Typography, TextField, Button } from "@mui/material";
 
-function FirstInterviewScreen({ firstInterviewData, setFirstInterviewData }) {
+function FirstInterviewScreen({profileData, firstInterviewData, setFirstInterviewData }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFirstInterviewData((prev) => ({
       ...prev,
       [name]: value || "",
     }));
+  };
+
+  // 「保存」ボタン押下時の処理
+  const handleSaveFirstInterview = async () => {
+    // candidate_id は profileData.id がセットされている前提
+    const firstInterviewPayload = {
+      candidate_id: profileData.id,
+      technical_skills: firstInterviewData.technicalSkills,
+      problem_solving: firstInterviewData.problemSolving,
+      logical_thinking: firstInterviewData.logicalThinking,
+      leadership: firstInterviewData.leadership,
+      career_vision: firstInterviewData.careerVision,
+    };
+
+    console.log("送信前の一次面接データ:", firstInterviewPayload);
+    try {
+      const response = await fetch("http://localhost:3001/first_interviews/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(firstInterviewPayload),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("一次面接データ登録成功", data);
+        // 成功時のフィードバックなど
+      } else {
+        console.error("一次面接データ登録エラー:", response.statusText);
+      }
+    } catch (error) {
+      console.error("ネットワークエラー:", error);
+    }
   };
 
   return (
@@ -61,6 +92,11 @@ function FirstInterviewScreen({ firstInterviewData, setFirstInterviewData }) {
           margin="normal"
           variant="outlined"
         />
+      </Box>
+      <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+        <Button variant="contained" onClick={handleSaveFirstInterview} sx={{ fontSize: "0.8rem" }}>
+          保存
+        </Button>
       </Box>
     </Container>
   );

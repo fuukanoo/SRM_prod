@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Box, Typography, TextField } from "@mui/material";
 
-function FinalInterviewScreen({ finalInterviewData, setFinalInterviewData }) {
+function FinalInterviewScreen({profileData, finalInterviewData, setFinalInterviewData }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFinalInterviewData((prev) => ({

@@ -143,6 +143,8 @@ function App() {
       if (response.ok) {
         const data = await response.json();
         console.log("Candidate登録成功", data);
+        setProfileData((prev) => ({ ...prev, id: data.id }));
+        setIsSubmitted(true);  // 登録成功後、表示専用モードに切り替える
         // 成功時の処理（画面遷移や通知表示など）
       } else {
         console.error("登録エラー:", response.statusText);
@@ -745,14 +747,14 @@ const handleAddStep = () => {
                   <Route path="/entryAdjustment" element={<EntryAdjustmentScreen profileData={profileData} setProfileData={setProfileData} />} />
                   <Route path="/casual" element={<CasualScreen profileData={profileData} casualData={casualData} setCasualData={setCasualData} />} />
                   <Route path="/casualAdjustment" element={<CasualAdjustmentScreen profileData={profileData} casualData={casualData} />} />
-                  <Route path="/firstInterview" element={<FirstInterviewScreen firstInterviewData={firstInterviewData} setFirstInterviewData={setFirstInterviewData} />} />
+                  <Route path="/firstInterview" element={<FirstInterviewScreen profileData={profileData} firstInterviewData={firstInterviewData} setFirstInterviewData={setFirstInterviewData} />} />
                   <Route path="/firstInterviewAdjustment" element={<FirstInterviewAdjustmentScreen profileData={profileData} casualData={casualData} firstInterviewData={firstInterviewData} />} />
-                  <Route path="/secondInterview" element={<SecondInterviewScreen secondInterviewData={secondInterviewData} setSecondInterviewData={setSecondInterviewData} />} />
+                  <Route path="/secondInterview" element={<SecondInterviewScreen profileData={profileData} secondInterviewData={secondInterviewData} setSecondInterviewData={setSecondInterviewData} />} />
                   <Route path="/secondInterviewAdjustment" element={<SecondInterviewAdjustmentScreen profileData={profileData} casualData={casualData} firstInterviewData={firstInterviewData} secondInterviewData={secondInterviewData} />} />
-                  <Route path="/finalInterview" element={<FinalInterviewScreen finalInterviewData={finalInterviewData} setFinalInterviewData={setFinalInterviewData} />} />
+                  <Route path="/finalInterview" element={<FinalInterviewScreen profileData={profileData} finalInterviewData={finalInterviewData} setFinalInterviewData={setFinalInterviewData} />} />
                   <Route path="/finalInterviewAdjustment" element={<FinalInterviewAdjustmentScreen profileData={profileData} casualData={casualData} firstInterviewData={firstInterviewData} secondInterviewData={secondInterviewData} finalInterviewData={finalInterviewData} />} />
                   {/* <Route path="/other" element={<OtherScreens profileData={profileData} casualData={casualData} />} /> */}
-                  <Route path="/followup/:followupId" element={<OtherScreens followupData={followupData} setFollowupData={setFollowupData}/>} />
+                  <Route path="/followup/:followupId" element={<OtherScreens profileData={profileData} followupData={followupData} setFollowupData={setFollowupData}/>} />
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
               </Grid>

@@ -1,20 +1,45 @@
 import React from "react";
-import {
-  Box,
-  Container,
-  Grid,
-  Card,
-  Typography,
-  Divider,
-  TextField,
-  Link
-} from "@mui/material";
+import {Box, Container, Grid, Card, Typography, Divider, TextField, Button, Link} from "@mui/material";
 
 function CasualScreen({ profileData, casualData, setCasualData }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCasualData((prev) => ({ ...prev, [name]: value }));
   };
+
+
+  // 「保存」ボタン押下時の処理
+  const handleSaveCasual = async () => {
+    // candidate_id はprofileData.idがセットされている前提
+    const casualInterviewData = {
+      candidate_id: profileData.id, // 必須フィールド。候補者登録後に得たIDを使う
+      result: casualData.result,
+      honesty: casualData.honesty,
+      team_love: casualData.teamLove,
+      charm: casualData.charm,
+      humility: casualData.humility,
+      notes: casualData.notes,
+    };
+
+    console.log("送信前のカジュアル面接データ:", casualInterviewData);
+    try {
+      const response = await fetch("http://localhost:3001/casual_interviews/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(casualInterviewData)
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("カジュアル面接データ登録成功", data);
+        // 必要に応じて、成功時のフィードバック（例：通知表示など）を追加
+      } else {
+        console.error("カジュアル面接データ登録エラー:", response.statusText);
+      }
+    } catch (error) {
+      console.error("ネットワークエラー:", error);
+    }
+  };
+
 
   const photoPreviewUrl = profileData.photo
     ? URL.createObjectURL(profileData.photo)
@@ -88,6 +113,21 @@ function CasualScreen({ profileData, casualData, setCasualData }) {
               />
             </Card>
           </Grid>
+
+          {/* 下部: 保存ボタン */}
+          <Grid item xs={12}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+              <Button
+                variant="contained"
+                onClick={handleSaveCasual}
+                sx={{ fontSize: "0.8rem" }}
+              >
+                保存
+              </Button>
+            </Box>
+          </Grid>
+
+
         </Grid>
       </Container>
     );
