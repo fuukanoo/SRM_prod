@@ -54,7 +54,7 @@ function CasualScreen({ profileData, casualData, setCasualData }) {
               <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 <TextField
                   fullWidth
-                  label="判定結果"
+                  label="合否"
                   name="result"
                   value={casualData.result || ""}
                   onChange={handleInputChange}
@@ -100,7 +100,7 @@ function CasualScreen({ profileData, casualData, setCasualData }) {
           <Grid item xs={12} md={6}>
             <Card sx={{ p: 3, boxShadow: 3 }}>
               <Typography variant="h6" gutterBottom>
-                備考記入欄
+                備考
               </Typography>
               <TextField
                 fullWidth
