@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Box, Typography, Divider, Link, Grid } from "@mui/material";
+import { Container, Box, Typography, Divider, Link, Grid} from "@mui/material";
 
 function SecondInterviewAdjustmentScreen({
   profileData,
@@ -45,7 +45,7 @@ function SecondInterviewAdjustmentScreen({
               カジュアル
             </Typography>
             <Typography variant="body1">
-              <strong>判定結果:</strong> {casualData.result || "未入力"}
+              <strong>合否:</strong> {casualData.result || "未入力"}
             </Typography>
             <Typography variant="body1">
               <strong>誠実:</strong> {casualData.honesty || "未入力"}
@@ -60,7 +60,7 @@ function SecondInterviewAdjustmentScreen({
               <strong>謙虚さと責任感:</strong> {casualData.humility || "未入力"}
             </Typography>
             <Typography variant="body1">
-              <strong>備考記入欄:</strong> {casualData.notes || "未入力"}
+              <strong>備考:</strong> {casualData.notes || "未入力"}
             </Typography>
           </Box>
         </Grid>
@@ -71,26 +71,50 @@ function SecondInterviewAdjustmentScreen({
             <Typography variant="h5" gutterBottom>
               1次面接
             </Typography>
-            <Typography variant="body1">
-              <strong>専門知識・技術力:</strong>{" "}
-              {firstInterviewData.technicalSkills || "未入力"}
-            </Typography>
-            <Typography variant="body1">
-              <strong>問題解決能力:</strong>{" "}
-              {firstInterviewData.problemSolving || "未入力"}
-            </Typography>
-            <Typography variant="body1">
-              <strong>論理的思考力:</strong>{" "}
-              {firstInterviewData.logicalThinking || "未入力"}
-            </Typography>
-            <Typography variant="body1">
-              <strong>リーダーシップ・主体性:</strong>{" "}
-              {firstInterviewData.leadership || "未入力"}
-            </Typography>
-            <Typography variant="body1">
-              <strong>キャリアビジョン:</strong>{" "}
-              {firstInterviewData.careerVision || "未入力"}
-            </Typography>
+              <Typography variant="body1">
+                <strong>合否:</strong>{" "}
+                {firstInterviewData.pass_fail || "未入力"}
+              </Typography>
+              <Typography variant="body1">
+                <strong>意見主張:</strong>{" "}
+                {firstInterviewData.assertion || "未入力"}
+              </Typography>
+              <Typography variant="body1">
+                <strong>言い訳:</strong>{" "}
+                {firstInterviewData.excuse || "未入力"}
+              </Typography>
+              <Typography variant="body1">
+                <strong>誠実:</strong>{" "}
+                {firstInterviewData.sincerity || "未入力"}
+              </Typography>
+              <Typography variant="body1">
+                <strong>逃げ癖:</strong>{" "}
+                {firstInterviewData.avoidance || "未入力"}
+              </Typography>
+              <Typography variant="body1">
+                <strong>イニシアチブ:</strong>{" "}
+                {firstInterviewData.initiative || "未入力"}
+              </Typography>
+              <Typography variant="body1">
+                <strong>チーム愛:</strong>{" "}
+                {firstInterviewData.teamLove || "未入力"}
+              </Typography>
+              <Typography variant="body1">
+                <strong>愛嬌:</strong>{" "}
+                {firstInterviewData.charm || "未入力"}
+              </Typography>
+              <Typography variant="body1">
+                <strong>謙虚さと責任感:</strong>{" "}
+                {firstInterviewData.humility || "未入力"}
+              </Typography>
+              <Typography variant="body1">
+                <strong>事実と解釈:</strong>{" "}
+                {firstInterviewData.factInterpretation || "未入力"}
+              </Typography>
+              <Typography variant="body1">
+                <strong>備考:</strong>{" "}
+                {firstInterviewData.notes || "未入力"}
+              </Typography>
           </Box>
         </Grid>
 
@@ -101,24 +125,28 @@ function SecondInterviewAdjustmentScreen({
               2次面接
             </Typography>
             <Typography variant="body1">
-              <strong>専門知識・技術力:</strong>{" "}
-              {secondInterviewData.technicalSkills || "未入力"}
+              <strong>合否:</strong>{" "}
+              {secondInterviewData.pass_fail || "未入力"}
             </Typography>
             <Typography variant="body1">
-              <strong>問題解決能力:</strong>{" "}
-              {secondInterviewData.problemSolving || "未入力"}
+              <strong>誠実:</strong>{" "}
+              {secondInterviewData.sincerity || "未入力"}
             </Typography>
             <Typography variant="body1">
-              <strong>論理的思考力:</strong>{" "}
-              {secondInterviewData.logicalThinking || "未入力"}
+              <strong>チーム愛:</strong>{" "}
+              {secondInterviewData.team_love || "未入力"}
             </Typography>
             <Typography variant="body1">
-              <strong>リーダーシップ・主体性:</strong>{" "}
-              {secondInterviewData.leadership || "未入力"}
+              <strong>愛嬌:</strong>{" "}
+              {secondInterviewData.charm || "未入力"}
             </Typography>
             <Typography variant="body1">
-              <strong>キャリアビジョン:</strong>{" "}
-              {secondInterviewData.careerVision || "未入力"}
+              <strong>謙虚さと責任感:</strong>{" "}
+              {secondInterviewData.humility || "未入力"}
+            </Typography>
+            <Typography variant="body1">
+              <strong>備考:</strong>{" "}
+              {secondInterviewData.notes || "未入力"}
             </Typography>
           </Box>
         </Grid>

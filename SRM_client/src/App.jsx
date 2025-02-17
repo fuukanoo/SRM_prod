@@ -27,7 +27,15 @@ function App() {
     career: "",
     resume: null,
     careerSheet: null,
+    route: "",
+    birthdate: "",
+    address: "",
+    origin: "",
+    employmentStatus: "",
+    university: "",
+    highSchool: "",
   });
+  
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -62,6 +70,10 @@ function App() {
     logicalThinking: "",
     leadership: "",
     careerVision: "",
+  });
+
+  const [followupData, setFollowupData] = useState({
+    notes: "",
   });
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -102,7 +114,46 @@ function App() {
   //   setCurrentStep(newStepIndex);
   // };
 
-
+  const handleRegister = async () => {
+    // stateに保持されたprofileDataをバックエンド用に整形
+    const candidateData = {
+      name: profileData.name,
+      furigana: profileData.furigana,
+      photo_url: profileData.photo ? URL.createObjectURL(profileData.photo) : null,
+      education: profileData.education,
+      career: profileData.career,
+      resume_url: profileData.resume ? URL.createObjectURL(profileData.resume) : null,
+      career_sheet_url: profileData.careerSheet ? URL.createObjectURL(profileData.careerSheet) : null,
+      route: profileData.route,
+      birthdate: profileData.birthdate, // "YYYY-MM-DD"形式に整形する場合も検討
+      address: profileData.address,
+      origin: profileData.origin,
+      employment_status: profileData.employmentStatus,
+      university: profileData.university,
+      high_school: profileData.highSchool,
+    };
+    try {
+      const response = await fetch("http://localhost:3001/candidates/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(candidateData)
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Candidate登録成功", data);
+        setProfileData((prev) => ({ ...prev, id: data.id }));
+        setIsSubmitted(true);  // 登録成功後、表示専用モードに切り替える
+        // 成功時の処理（画面遷移や通知表示など）
+      } else {
+        console.error("登録エラー:", response.statusText);
+      }
+    } catch (error) {
+      console.error("ネットワークエラー:", error);
+    }
+  };
+  
 
 
   // 例: handleAddStep の修正例
@@ -185,7 +236,8 @@ const handleAddStep = () => {
                   sx={{
                     p: { xs: 2, md: 2 },                // パディングを画面サイズに応じて調整
                     boxShadow: 3,
-                    maxHeight: { xs: '80vh', md: '90vh' }, // 高さの制限とレスポンシブ調整
+                    maxHeight: { xs: '80vh', md: '72vh', lg: '68vh' }, // 高さの制限とレスポンシブ調整
+                    overflowY: 'auto',
                   }}
                 >
                   {/* 写真と名前の部分 */}
@@ -195,11 +247,11 @@ const handleAddStep = () => {
                       alignItems: "flex-end",
                       gap: 2,
                     }}
-                  >
+                  >                   
                     <Box
                       sx={{
                         width: { xs: 90, md: 90 },          // 幅を画面サイズに合わせて調整
-                        height: { xs: 120, md: 120 },          // 高さも同様に調整
+                        height: { xs: 120, md: 120 },         // 高さも同様に調整
                         flexShrink: 0,
                         backgroundColor: "#f5f5f5",
                         borderRadius: "8px",
@@ -210,9 +262,9 @@ const handleAddStep = () => {
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         border: "2px solid #ddd",
-                        cursor: "pointer",
+                        cursor: isSubmitted ? "default" : "pointer", // 表示専用の場合はクリック不可
                       }}
-                      onClick={() => fileInputRef.current.click()}
+                      onClick={isSubmitted ? undefined : () => fileInputRef.current.click()}
                     >
                       {!photoPreviewUrl && (
                         <Typography variant="body2" sx={{ fontSize: { xs: '0.7rem', md: '0.8rem' } }}>
@@ -220,6 +272,7 @@ const handleAddStep = () => {
                         </Typography>
                       )}
                     </Box>
+
 
                     <Box>
                       {isSubmitted ? (
@@ -259,7 +312,7 @@ const handleAddStep = () => {
                             fullWidth
                             label="ふりがな"
                             name="furigana"
-                            value={profileData.furigana || ""}
+                            value={profileData.furigana}
                             onChange={handleInputChange}
                             variant="outlined"
                             sx={{
@@ -279,7 +332,7 @@ const handleAddStep = () => {
                             fullWidth
                             label="名前"
                             name="name"
-                            value={profileData.name || ""}
+                            value={profileData.name}
                             onChange={handleInputChange}
                             variant="outlined"
                             sx={{
@@ -328,7 +381,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="職務経歴"
                           name="career"
-                          value={profileData.career || ""}
+                          value={profileData.career}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -394,7 +447,7 @@ const handleAddStep = () => {
                       )}
                     </Grid>
 
-                    // 職務経歴書フィールド
+                    {/* 職務経歴書フィールド */}
                     <Grid item xs={12} sm={12} md={12}>
                       {isSubmitted ? (
                         <Typography variant="body1">
@@ -453,7 +506,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="経路"
                           name="route"
-                          value={profileData.route || ""}
+                          value={profileData.route}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -483,7 +536,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="生年月日"
                           name="birthdate"
-                          value={profileData.birthdate || ""}
+                          value={profileData.birthdate}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -513,7 +566,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="住所"
                           name="address"
-                          value={profileData.address || ""}
+                          value={profileData.address}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -542,8 +595,8 @@ const handleAddStep = () => {
                         <TextField
                           fullWidth
                           label="出身"
-                          name="address"
-                          value={profileData.address || ""}
+                          name="origin"
+                          value={profileData.origin}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -573,7 +626,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="就業状況"
                           name="employmentStatus"
-                          value={profileData.employmentStatus || ""}
+                          value={profileData.employmentStatus}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -602,8 +655,8 @@ const handleAddStep = () => {
                         <TextField
                           fullWidth
                           label="大学"
-                          name="status"
-                          value={profileData.status || ""}
+                          name="university"
+                          value={profileData.university}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -633,7 +686,7 @@ const handleAddStep = () => {
                           fullWidth
                           label="高校"
                           name="highSchool"
-                          value={profileData.highSchool || ""}
+                          value={profileData.highSchool}
                           onChange={handleInputChange}
                           variant="outlined"
                           sx={{
@@ -651,10 +704,18 @@ const handleAddStep = () => {
                         />
                       )}
                       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
+                        {/* 編集ボタンの追加 */}
+                        <Button
+                          variant="outlined"
+                          onClick={() => setIsSubmitted(false)}
+                          sx={{ fontSize: { xs: '0.8rem', md: '0.8rem' }, ml: 1 }}
+                        >
+                          編集
+                        </Button>
                         <Button
                           variant="contained"
-                          onClick={() => setIsSubmitted(true)}
-                          sx={{ fontSize: { xs: '0.8rem', md: '0.8rem' } }}
+                          onClick={handleRegister}
+                          sx={{ fontSize: { xs: '0.8rem', md: '0.8rem' }, ml: 1 }}
                         >
                           登録
                         </Button>
@@ -686,14 +747,14 @@ const handleAddStep = () => {
                   <Route path="/entryAdjustment" element={<EntryAdjustmentScreen profileData={profileData} setProfileData={setProfileData} />} />
                   <Route path="/casual" element={<CasualScreen profileData={profileData} casualData={casualData} setCasualData={setCasualData} />} />
                   <Route path="/casualAdjustment" element={<CasualAdjustmentScreen profileData={profileData} casualData={casualData} />} />
-                  <Route path="/firstInterview" element={<FirstInterviewScreen firstInterviewData={firstInterviewData} setFirstInterviewData={setFirstInterviewData} />} />
+                  <Route path="/firstInterview" element={<FirstInterviewScreen profileData={profileData} firstInterviewData={firstInterviewData} setFirstInterviewData={setFirstInterviewData} />} />
                   <Route path="/firstInterviewAdjustment" element={<FirstInterviewAdjustmentScreen profileData={profileData} casualData={casualData} firstInterviewData={firstInterviewData} />} />
-                  <Route path="/secondInterview" element={<SecondInterviewScreen secondInterviewData={secondInterviewData} setSecondInterviewData={setSecondInterviewData} />} />
+                  <Route path="/secondInterview" element={<SecondInterviewScreen profileData={profileData} secondInterviewData={secondInterviewData} setSecondInterviewData={setSecondInterviewData} />} />
                   <Route path="/secondInterviewAdjustment" element={<SecondInterviewAdjustmentScreen profileData={profileData} casualData={casualData} firstInterviewData={firstInterviewData} secondInterviewData={secondInterviewData} />} />
-                  <Route path="/finalInterview" element={<FinalInterviewScreen finalInterviewData={finalInterviewData} setFinalInterviewData={setFinalInterviewData} />} />
+                  <Route path="/finalInterview" element={<FinalInterviewScreen profileData={profileData} finalInterviewData={finalInterviewData} setFinalInterviewData={setFinalInterviewData} />} />
                   <Route path="/finalInterviewAdjustment" element={<FinalInterviewAdjustmentScreen profileData={profileData} casualData={casualData} firstInterviewData={firstInterviewData} secondInterviewData={secondInterviewData} finalInterviewData={finalInterviewData} />} />
                   {/* <Route path="/other" element={<OtherScreens profileData={profileData} casualData={casualData} />} /> */}
-                  <Route path="/followup/:followupId" element={<OtherScreens profileData={profileData} casualData={casualData} />} />
+                  <Route path="/followup/:followupId" element={<OtherScreens profileData={profileData} followupData={followupData} setFollowupData={setFollowupData}/>} />
                   <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
               </Grid>

@@ -15,7 +15,7 @@ function CasualAdjustmentScreen({ profileData, casualData }) {
           カジュアル
         </Typography>
         <Typography variant="body1">
-          <strong>判定結果:</strong> {casualData.result || "未入力"}
+          <strong>合否:</strong> {casualData.result || "未入力"}
         </Typography>
         <Typography variant="body1">
           <strong>誠実:</strong> {casualData.honesty || "未入力"}
@@ -30,7 +30,7 @@ function CasualAdjustmentScreen({ profileData, casualData }) {
           <strong>謙虚さと責任感:</strong> {casualData.humility || "未入力"}
         </Typography>
         <Typography variant="body1">
-          <strong>備考記入欄:</strong> {casualData.notes || "未入力"}
+          <strong>備考:</strong> {casualData.notes || "未入力"}
         </Typography>
       </Box>
     </Container>
