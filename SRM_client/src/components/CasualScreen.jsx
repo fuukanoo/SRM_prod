@@ -45,92 +45,86 @@ function CasualScreen({ profileData, casualData, setCasualData }) {
     ? URL.createObjectURL(profileData.photo)
     : null;
 
-    return (
-      <Container maxWidth="lg" sx={{ py: 4 }}>
-        <Grid container spacing={4}>
-          {/* 中央セクション: 判定結果～謙虚さと責任感 */}
-          <Grid item xs={12} md={6}>
-            <Card sx={{ p: 3, boxShadow: 3 }}>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                <TextField
-                  fullWidth
-                  label="合否"
-                  name="result"
-                  value={casualData.result || ""}
-                  onChange={handleInputChange}
-                  variant="outlined"
-                />
-                <TextField
-                  fullWidth
-                  label="誠実"
-                  name="honesty"
-                  value={casualData.honesty || ""}
-                  onChange={handleInputChange}
-                  variant="outlined"
-                />
-                <TextField
-                  fullWidth
-                  label="チーム愛"
-                  name="teamLove"
-                  value={casualData.teamLove || ""}
-                  onChange={handleInputChange}
-                  variant="outlined"
-                />
-                <TextField
-                  fullWidth
-                  label="愛嬌"
-                  name="charm"
-                  value={casualData.charm || ""}
-                  onChange={handleInputChange}
-                  variant="outlined"
-                />
-                <TextField
-                  fullWidth
-                  label="謙虚さと責任感"
-                  name="humility"
-                  value={casualData.humility || ""}
-                  onChange={handleInputChange}
-                  variant="outlined"
-                />
-              </Box>
-            </Card>
-          </Grid>
-  
-          {/* 右側セクション: 備考記入欄 */}
-          <Grid item xs={12} md={6}>
-            <Card sx={{ p: 3, boxShadow: 3 }}>
-              <Typography variant="h6" gutterBottom>
-                備考
-              </Typography>
+  return (
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Grid container spacing={4}>
+        {/* 中央セクション: 評価項目 */}
+        <Grid item xs={12} md={6}>
+          <Card sx={{ p: 3, boxShadow: 3 }}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <TextField
                 fullWidth
-                name="notes"
-                value={casualData.notes || ""}
+                label="合否"
+                name="result"
+                value={casualData.result || ""}
                 onChange={handleInputChange}
-                multiline
-                rows={5}
                 variant="outlined"
               />
-            </Card>
-          </Grid>
-
-          {/* 下部: 保存ボタン */}
-          <Grid item xs={12}>
-            <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-              <Button
-                variant="contained"
-                onClick={handleSaveCasual}
-                sx={{ fontSize: "0.8rem" }}
-              >
-                保存
-              </Button>
+              <TextField
+                fullWidth
+                label="誠実"
+                name="honesty"
+                value={casualData.honesty || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+              />
+              <TextField
+                fullWidth
+                label="チーム愛"
+                name="teamLove"
+                value={casualData.teamLove || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+              />
+              <TextField
+                fullWidth
+                label="愛嬌"
+                name="charm"
+                value={casualData.charm || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+              />
+              <TextField
+                fullWidth
+                label="謙虚さと責任感"
+                name="humility"
+                value={casualData.humility || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+              />
             </Box>
-          </Grid>
-
-
+          </Card>
         </Grid>
-      </Container>
-    );
+  
+        {/* 右側セクション: 備考入力欄 */}
+        <Grid item xs={12} md={6}>
+          <Card sx={{ p: 3, boxShadow: 3 }}>
+            <Typography variant="h6" gutterBottom>
+              備考
+            </Typography>
+            <TextField
+              fullWidth
+              name="notes"
+              value={casualData.notes || ""}
+              onChange={handleInputChange}
+              multiline
+              rows={5}
+              variant="outlined"
+            />
+          </Card>
+        </Grid>
+  
+        {/* 下部: 保存ボタン */}
+        <Grid item xs={12}>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+            <Button variant="contained" onClick={handleSaveCasual} sx={{ fontSize: "0.8rem" }}>
+              保存
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
+    </Container>
+  );
 }
 
 export default CasualScreen;
