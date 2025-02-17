@@ -14,11 +14,17 @@ function FinalInterviewScreen({ profileData, finalInterviewData, setFinalIntervi
     // profileData.id に候補者登録時のIDがセットされている前提
     const finalInterviewPayload = {
       candidate_id: profileData.id,
-      technical_skills: finalInterviewData.technicalSkills,
-      problem_solving: finalInterviewData.problemSolving,
-      logical_thinking: finalInterviewData.logicalThinking,
-      leadership: finalInterviewData.leadership,
-      career_vision: finalInterviewData.careerVision,
+      pass_fail: finalInterviewData.pass_fail,
+      assertion: finalInterviewData.assertion,
+      excuse: finalInterviewData.excuse,
+      sincerity: finalInterviewData.sincerity,
+      avoidance: finalInterviewData.avoidance,
+      initiative: finalInterviewData.initiative,
+      team_love: finalInterviewData.team_love,
+      charm: finalInterviewData.charm,
+      humility: finalInterviewData.humility,
+      fact_interpretation: finalInterviewData.fact_interpretation,
+      notes: finalInterviewData.notes,
     };
 
     console.log("送信前の最終面接データ:", finalInterviewPayload);
@@ -48,45 +54,99 @@ function FinalInterviewScreen({ profileData, finalInterviewData, setFinalIntervi
       <Box component="form" noValidate autoComplete="off">
         <TextField
           fullWidth
-          label="専門知識・技術力"
-          name="technicalSkills"
-          value={finalInterviewData.technicalSkills}
+          label="合否"
+          name="pass_fail"
+          value={finalInterviewData.pass_fail}
           onChange={handleInputChange}
           margin="normal"
           variant="outlined"
         />
         <TextField
           fullWidth
-          label="問題解決能力"
-          name="problemSolving"
-          value={finalInterviewData.problemSolving}
+          label="意見主張"
+          name="assertion"
+          value={finalInterviewData.assertion}
           onChange={handleInputChange}
           margin="normal"
           variant="outlined"
         />
         <TextField
           fullWidth
-          label="論理的思考力"
-          name="logicalThinking"
-          value={finalInterviewData.logicalThinking}
+          label="言い訳"
+          name="excuse"
+          value={finalInterviewData.excuse}
           onChange={handleInputChange}
           margin="normal"
           variant="outlined"
         />
         <TextField
           fullWidth
-          label="リーダーシップ・主体性"
-          name="leadership"
-          value={finalInterviewData.leadership}
+          label="誠実"
+          name="sincerity"
+          value={finalInterviewData.sincerity}
           onChange={handleInputChange}
           margin="normal"
           variant="outlined"
         />
         <TextField
           fullWidth
-          label="キャリアビジョン"
-          name="careerVision"
-          value={finalInterviewData.careerVision}
+          label="逃げ癖"
+          name="avoidance"
+          value={finalInterviewData.avoidance}
+          onChange={handleInputChange}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          fullWidth
+          label="イニシアチブ"
+          name="initiative"
+          value={finalInterviewData.initiative}
+          onChange={handleInputChange}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          fullWidth
+          label="チーム愛"
+          name="team_love"
+          value={finalInterviewData.team_love}
+          onChange={handleInputChange}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          fullWidth
+          label="愛嬌"
+          name="charm"
+          value={finalInterviewData.charm}
+          onChange={handleInputChange}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          fullWidth
+          label="謙虚さと責任感"
+          name="humility"
+          value={finalInterviewData.humility}
+          onChange={handleInputChange}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          fullWidth
+          label="事実と解釈"
+          name="fact_interpretation"
+          value={finalInterviewData.fact_interpretation}
+          onChange={handleInputChange}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          fullWidth
+          label="備考"
+          name="notes"
+          value={finalInterviewData.notes}
           onChange={handleInputChange}
           margin="normal"
           variant="outlined"

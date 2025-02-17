@@ -15,11 +15,12 @@ function SecondInterviewScreen({ profileData, secondInterviewData, setSecondInte
     // profileData.id が候補者登録後にセットされている前提
     const secondInterviewPayload = {
       candidate_id: profileData.id,
-      technical_skills: secondInterviewData.technicalSkills,
-      problem_solving: secondInterviewData.problemSolving,
-      logical_thinking: secondInterviewData.logicalThinking,
-      leadership: secondInterviewData.leadership,
-      career_vision: secondInterviewData.careerVision,
+      pass_fail: secondInterviewData.pass_fail,
+      sincerity: secondInterviewData.sincerity,
+      team_love: secondInterviewData.team_love,
+      charm: secondInterviewData.charm,
+      humility: secondInterviewData.humility,
+      notes: secondInterviewData.notes,
     };
 
     console.log("送信前の二次面接データ:", secondInterviewPayload);
@@ -49,45 +50,54 @@ function SecondInterviewScreen({ profileData, secondInterviewData, setSecondInte
       <Box component="form" noValidate autoComplete="off">
         <TextField
           fullWidth
-          label="専門知識・技術力"
-          name="technicalSkills"
-          value={secondInterviewData.technicalSkills}
+          label="合否"
+          name="pass_fail"
+          value={secondInterviewData.pass_fail}
           onChange={handleInputChange}
           margin="normal"
           variant="outlined"
         />
         <TextField
           fullWidth
-          label="問題解決能力"
-          name="problemSolving"
-          value={secondInterviewData.problemSolving}
+          label="誠実"
+          name="sincerity"
+          value={secondInterviewData.sincerity}
           onChange={handleInputChange}
           margin="normal"
           variant="outlined"
         />
         <TextField
           fullWidth
-          label="論理的思考力"
-          name="logicalThinking"
-          value={secondInterviewData.logicalThinking}
+          label="チーム愛"
+          name="team_love"
+          value={secondInterviewData.team_love}
           onChange={handleInputChange}
           margin="normal"
           variant="outlined"
         />
         <TextField
           fullWidth
-          label="リーダーシップ・主体性"
-          name="leadership"
-          value={secondInterviewData.leadership}
+          label="愛嬌"
+          name="charm"
+          value={secondInterviewData.charm}
           onChange={handleInputChange}
           margin="normal"
           variant="outlined"
         />
         <TextField
           fullWidth
-          label="キャリアビジョン"
-          name="careerVision"
-          value={secondInterviewData.careerVision}
+          label="謙虚さと責任感"
+          name="humility"
+          value={secondInterviewData.humility}
+          onChange={handleInputChange}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          fullWidth
+          label="備考"
+          name="notes"
+          value={secondInterviewData.notes}
           onChange={handleInputChange}
           margin="normal"
           variant="outlined"

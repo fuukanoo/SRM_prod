@@ -87,11 +87,17 @@ class CasualInterviewCreate(BaseModel):
 class FirstInterviewSchema(BaseModel):
     id: int
     candidate_id: int
-    technical_skills: Optional[str] = None
-    problem_solving: Optional[str] = None
-    logical_thinking: Optional[str] = None
-    leadership: Optional[str] = None
-    career_vision: Optional[str] = None
+    pass_fail: Optional[str] = None
+    assertion: Optional[str] = None
+    excuse: Optional[str] = None
+    sincerity: Optional[str] = None
+    avoidance: Optional[str] = None
+    initiative: Optional[str] = None
+    team_love: Optional[str] = None
+    charm: Optional[str] = None
+    humility: Optional[str] = None
+    fact_interpretation: Optional[str] = None
+    notes: Optional[str] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 
@@ -101,11 +107,17 @@ class FirstInterviewSchema(BaseModel):
 # 入力用スキーマ
 class FirstInterviewCreate(BaseModel):
     candidate_id: int
-    technical_skills: Optional[str] = None
-    problem_solving: Optional[str] = None
-    logical_thinking: Optional[str] = None
-    leadership: Optional[str] = None
-    career_vision: Optional[str] = None
+    pass_fail: Optional[str] = None
+    assertion: Optional[str] = None
+    excuse: Optional[str] = None
+    sincerity: Optional[str] = None
+    avoidance: Optional[str] = None
+    initiative: Optional[str] = None
+    team_love: Optional[str] = None
+    charm: Optional[str] = None
+    humility: Optional[str] = None
+    fact_interpretation: Optional[str] = None
+    notes: Optional[str] = None
 
     class Config:
         orm_mode = True
@@ -118,11 +130,12 @@ class FirstInterviewCreate(BaseModel):
 class SecondInterviewSchema(BaseModel):
     id: int
     candidate_id: int
-    technical_skills: Optional[str] = None
-    problem_solving: Optional[str] = None
-    logical_thinking: Optional[str] = None
-    leadership: Optional[str] = None
-    career_vision: Optional[str] = None
+    pass_fail: Optional[str] = None
+    sincerity: Optional[str] = None
+    team_love: Optional[str] = None
+    charm: Optional[str] = None
+    humility: Optional[str] = None
+    notes: Optional[str] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 
@@ -132,11 +145,12 @@ class SecondInterviewSchema(BaseModel):
 # 入力用スキーマ
 class SecondInterviewCreate(BaseModel):
     candidate_id: int
-    technical_skills: Optional[str] = None
-    problem_solving: Optional[str] = None
-    logical_thinking: Optional[str] = None
-    leadership: Optional[str] = None
-    career_vision: Optional[str] = None
+    pass_fail: Optional[str] = None
+    sincerity: Optional[str] = None
+    team_love: Optional[str] = None
+    charm: Optional[str] = None
+    humility: Optional[str] = None
+    notes: Optional[str] = None
 
     class Config:
         orm_mode = True
@@ -149,11 +163,17 @@ class SecondInterviewCreate(BaseModel):
 class FinalInterviewSchema(BaseModel):
     id: int
     candidate_id: int
-    technical_skills: Optional[str] = None
-    problem_solving: Optional[str] = None
-    logical_thinking: Optional[str] = None
-    leadership: Optional[str] = None
-    career_vision: Optional[str] = None
+    pass_fail: Optional[str] = None
+    assertion: Optional[str] = None
+    excuse: Optional[str] = None
+    sincerity: Optional[str] = None
+    avoidance: Optional[str] = None
+    initiative: Optional[str] = None
+    team_love: Optional[str] = None
+    charm: Optional[str] = None
+    humility: Optional[str] = None
+    fact_interpretation: Optional[str] = None
+    notes: Optional[str] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 
@@ -163,11 +183,17 @@ class FinalInterviewSchema(BaseModel):
 # 入力用スキーマ
 class FinalInterviewCreate(BaseModel):
     candidate_id: int
-    technical_skills: Optional[str] = None
-    problem_solving: Optional[str] = None
-    logical_thinking: Optional[str] = None
-    leadership: Optional[str] = None
-    career_vision: Optional[str] = None
+    pass_fail: Optional[str] = None
+    assertion: Optional[str] = None
+    excuse: Optional[str] = None
+    sincerity: Optional[str] = None
+    avoidance: Optional[str] = None
+    initiative: Optional[str] = None
+    team_love: Optional[str] = None
+    charm: Optional[str] = None
+    humility: Optional[str] = None
+    fact_interpretation: Optional[str] = None
+    notes: Optional[str] = None
 
     class Config:
         orm_mode = True
