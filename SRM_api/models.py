@@ -75,11 +75,17 @@ class FinalInterview(Base):
     __tablename__ = "final_interviews"
     id = Column(Integer, primary_key=True, index=True)
     candidate_id = Column(Integer, ForeignKey("candidates.id", ondelete="CASCADE"), nullable=False)
-    technical_skills = Column(String(50))
-    problem_solving = Column(String(50))
-    logical_thinking = Column(String(50))
-    leadership = Column(String(50))
-    career_vision = Column(String(50))
+    pass_fail = Column(String(50))            # 合否（合格 or 不合格）
+    assertion = Column(String(50))            # 意見主張（1,2,3）
+    excuse = Column(String(50))               # 言い訳（1,2,3）
+    sincerity = Column(String(50))            # 誠実（1,2,3）
+    avoidance = Column(String(50))            # 逃げ癖（1,2,3）
+    initiative = Column(String(50))           # イニシアチブ（1,2,3）
+    team_love = Column(String(50))            # チーム愛（1,2,3）
+    charm = Column(String(50))                # 愛嬌（1,2,3）
+    humility = Column(String(50))             # 謙虚さと責任感（1,2,3）
+    fact_interpretation = Column(String(50))    # 事実と解釈（1,2,3）
+    notes = Column(Text)                      # 備考（自由記述）
     created_at = Column(TIMESTAMP, server_default=func.now())
     updated_at = Column(TIMESTAMP, server_default=func.now(), onupdate=func.now())
 

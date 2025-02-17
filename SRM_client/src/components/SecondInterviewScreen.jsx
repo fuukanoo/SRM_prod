@@ -15,11 +15,12 @@ function SecondInterviewScreen({ profileData, secondInterviewData, setSecondInte
     // profileData.id が候補者登録後にセットされている前提
     const secondInterviewPayload = {
       candidate_id: profileData.id,
-      technical_skills: secondInterviewData.technicalSkills,
-      problem_solving: secondInterviewData.problemSolving,
-      logical_thinking: secondInterviewData.logicalThinking,
-      leadership: secondInterviewData.leadership,
-      career_vision: secondInterviewData.careerVision,
+      pass_fail: secondInterviewData.pass_fail,
+      sincerity: secondInterviewData.sincerity,
+      team_love: secondInterviewData.team_love,
+      charm: secondInterviewData.charm,
+      humility: secondInterviewData.humility,
+      notes: secondInterviewData.notes,
     };
 
     console.log("送信前の二次面接データ:", secondInterviewPayload);
