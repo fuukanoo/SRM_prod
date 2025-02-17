@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Box, Typography, TextField, Button } from "@mui/material";
+import { Container, Box, Typography, TextField, Button, Grid, Card } from "@mui/material";
 
 function FinalInterviewScreen({ profileData, finalInterviewData, setFinalInterviewData }) {
   const handleInputChange = (e) => {
@@ -46,117 +46,148 @@ function FinalInterviewScreen({ profileData, finalInterviewData, setFinalIntervi
     }
   };
 
+  // 各評価項目の入力欄のスタイル（例：入力部分の高さを xs:40px, md:40px に固定）
+  const fieldSx = {
+    '& .MuiInputBase-input': {
+      fontSize: { xs: '0.8rem', md: '0.8rem' },
+      padding: { xs: '6px 8px', md: '6px 8px' },
+    },
+    '& .MuiInputLabel-root': {
+      fontSize: { xs: '0.8rem', md: '0.8rem' },
+    },
+    '& .MuiOutlinedInput-root': {
+      height: { xs: '40px', md: '30px' },
+    },
+  };
+
   return (
-    <Container maxWidth="sm" sx={{ py: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        最終面接
-      </Typography>
-      <Box component="form" noValidate autoComplete="off">
-        <TextField
-          fullWidth
-          label="合否"
-          name="pass_fail"
-          value={finalInterviewData.pass_fail}
-          onChange={handleInputChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          label="意見主張"
-          name="assertion"
-          value={finalInterviewData.assertion}
-          onChange={handleInputChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          label="言い訳"
-          name="excuse"
-          value={finalInterviewData.excuse}
-          onChange={handleInputChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          label="誠実"
-          name="sincerity"
-          value={finalInterviewData.sincerity}
-          onChange={handleInputChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          label="逃げ癖"
-          name="avoidance"
-          value={finalInterviewData.avoidance}
-          onChange={handleInputChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          label="イニシアチブ"
-          name="initiative"
-          value={finalInterviewData.initiative}
-          onChange={handleInputChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          label="チーム愛"
-          name="team_love"
-          value={finalInterviewData.team_love}
-          onChange={handleInputChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          label="愛嬌"
-          name="charm"
-          value={finalInterviewData.charm}
-          onChange={handleInputChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          label="謙虚さと責任感"
-          name="humility"
-          value={finalInterviewData.humility}
-          onChange={handleInputChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          label="事実と解釈"
-          name="fact_interpretation"
-          value={finalInterviewData.fact_interpretation}
-          onChange={handleInputChange}
-          margin="normal"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          label="備考"
-          name="notes"
-          value={finalInterviewData.notes}
-          onChange={handleInputChange}
-          margin="normal"
-          variant="outlined"
-        />
-      </Box>
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-        <Button variant="contained" onClick={handleSaveFinalInterview} sx={{ fontSize: "0.8rem" }}>
-          保存
-        </Button>
-      </Box>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Grid container spacing={4}>
+        {/* 左側セクション: 評価項目を1列表示 */}
+        <Grid item xs={12} md={6}>
+          <Card sx={{ p: 3, boxShadow: 3 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <TextField
+                fullWidth
+                label="合否"
+                name="pass_fail"
+                value={finalInterviewData.pass_fail || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+                sx={fieldSx}
+              />
+              <TextField
+                fullWidth
+                label="意見主張"
+                name="assertion"
+                value={finalInterviewData.assertion || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+                sx={fieldSx}
+              />
+              <TextField
+                fullWidth
+                label="言い訳"
+                name="excuse"
+                value={finalInterviewData.excuse || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+                sx={fieldSx}
+              />
+              <TextField
+                fullWidth
+                label="誠実"
+                name="sincerity"
+                value={finalInterviewData.sincerity || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+                sx={fieldSx}
+              />
+              <TextField
+                fullWidth
+                label="逃げ癖"
+                name="avoidance"
+                value={finalInterviewData.avoidance || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+                sx={fieldSx}
+              />
+              <TextField
+                fullWidth
+                label="イニシアチブ"
+                name="initiative"
+                value={finalInterviewData.initiative || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+                sx={fieldSx}
+              />
+              <TextField
+                fullWidth
+                label="チーム愛"
+                name="team_love"
+                value={finalInterviewData.team_love || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+                sx={fieldSx}
+              />
+              <TextField
+                fullWidth
+                label="愛嬌"
+                name="charm"
+                value={finalInterviewData.charm || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+                sx={fieldSx}
+              />
+              <TextField
+                fullWidth
+                label="謙虚さと責任感"
+                name="humility"
+                value={finalInterviewData.humility || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+                sx={fieldSx}
+              />
+              <TextField
+                fullWidth
+                label="事実と解釈"
+                name="fact_interpretation"
+                value={finalInterviewData.fact_interpretation || ""}
+                onChange={handleInputChange}
+                variant="outlined"
+                sx={fieldSx}
+              />
+            </Box>
+          </Card>
+        </Grid>
+
+        {/* 右側セクション: 備考 */}
+        <Grid item xs={12} md={6}>
+          <Card sx={{ p: 3, boxShadow: 3 }}>
+            <Typography variant="h6" gutterBottom>
+              備考
+            </Typography>
+            <TextField
+              fullWidth
+              name="notes"
+              value={finalInterviewData.notes || ""}
+              onChange={handleInputChange}
+              multiline
+              rows={10}
+              variant="outlined"
+            />
+          </Card>
+        </Grid>
+
+        {/* 下部: 保存ボタン */}
+        <Grid item xs={12}>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+            <Button variant="contained" onClick={handleSaveFinalInterview} sx={{ fontSize: '0.8rem' }}>
+              保存
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
     </Container>
   );
 }
